@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KumarNet Gast - Anmeldung fehlgeschlagen</title>
+    <style>
+        :root {
+            --color-primary: #3B82F6;
+            --color-primary-hover: #2563EB;
+            --color-primary-glow: rgba(59, 130, 246, 0.4);
+            --color-bg-dark: #0F172A;
+            --color-bg-light: #1E293B;
+            --color-card: rgba(255, 255, 255, 0.08);
+            --color-card-border: rgba(255, 255, 255, 0.12);
+            --color-text: #F1F5F9;
+            --color-text-muted: #94A3B8;
+            --color-border: rgba(148, 163, 184, 0.25);
+            --color-input-bg: rgba(15, 23, 42, 0.5);
+            --color-input-focus: #3B82F6;
+            --color-error: #F87171;
+            --color-error-bg: rgba(248, 113, 113, 0.1);
+            --color-error-border: rgba(248, 113, 113, 0.3);
+            --color-success: #4ADE80;
+            --color-success-bg: rgba(74, 222, 128, 0.1);
+            --color-success-border: rgba(74, 222, 128, 0.3);
+            --card-max-width: 420px;
+            --card-radius: 16px;
+            --input-radius: 10px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, var(--color-bg-dark) 0%, var(--color-bg-light) 50%, var(--color-bg-dark) 100%);
+            color: var(--color-text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            line-height: 1.5;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #network-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .card {
+            background: var(--color-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--card-radius);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 80px rgba(59, 130, 246, 0.05);
+            width: 100%;
+            max-width: var(--card-max-width);
+            padding: 2.5rem 2rem;
+            position: relative;
+            z-index: 1;
+            animation: card-enter 0.6s ease-out both;
+        }
+
+        @keyframes card-enter {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-wrap::before {
+            content: "";
+            position: absolute;
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        .logo svg {
+            width: 56px;
+            height: 56px;
+            color: var(--color-primary);
+            filter: drop-shadow(0 0 8px var(--color-primary-glow));
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                transform: scale(1);
+                border-color: rgba(59, 130, 246, 0.3);
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+            }
+            50% {
+                transform: scale(1.08);
+                border-color: rgba(59, 130, 246, 0.5);
+                box-shadow: 0 0 20px 4px rgba(59, 130, 246, 0.15);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: var(--color-text);
+        }
+
+        .header p {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.375rem;
+            color: var(--color-text-muted);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 0.625rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border: 1px solid var(--color-border);
+            border-radius: var(--input-radius);
+            background-color: var(--color-input-bg);
+            color: var(--color-text);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-group input[type="text"]::placeholder,
+        .form-group input[type="password"]::placeholder {
+            color: rgba(148, 163, 184, 0.5);
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="password"]:focus {
+            outline: none;
+            border-color: var(--color-input-focus);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2), 0 0 16px rgba(59, 130, 246, 0.1);
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #FFFFFF;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+            border: none;
+            border-radius: var(--input-radius);
+            cursor: pointer;
+            transition: box-shadow 0.2s ease, transform 0.1s ease;
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
+        }
+
+        .btn-submit:hover {
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        .alert {
+            padding: 0.75rem 1rem;
+            border-radius: var(--input-radius);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid;
+        }
+
+        .alert-error {
+            background-color: var(--color-error-bg);
+            border-color: var(--color-error-border);
+            color: var(--color-error);
+        }
+
+        .alert-success {
+            background-color: var(--color-success-bg);
+            border-color: var(--color-success-border);
+            color: var(--color-success);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .logo-wrap::before,
+            .card,
+            .btn-submit::after {
+                animation: none;
+            }
+            .card {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="network-bg" aria-hidden="true"></canvas>
+
+    <div class="card">
+        <div class="logo">
+            <div class="logo-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M8.5 12.5c0-2 1.5-3.5 3.5-3.5s3.5 1.5 3.5 3.5" fill="none"/>
+                    <path d="M10 15c0-1.1.9-2 2-2s2 .9 2 2" fill="none"/>
+                    <circle cx="12" cy="17" r="0.5" fill="currentColor" stroke="none"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="header">
+            <h1>Anmeldung fehlgeschlagen</h1>
+            <p>Bitte Zugangsdaten prüfen und erneut versuchen</p>
+        </div>
+
+        <div class="alert alert-error" role="alert">
+            $PORTAL_MESSAGE$
+        </div>
+
+        <form method="POST" action="$PORTAL_ACTION$">
+            <input type="hidden" name="redirurl" value="$PORTAL_REDIRURL$">
+            <input type="hidden" name="zone" value="$PORTAL_ZONE$">
+
+            <div class="form-group">
+                <label for="auth_user">Benutzername</label>
+                <input type="text" id="auth_user" name="auth_user" required autofocus autocomplete="username" placeholder="Benutzername eingeben">
+            </div>
+
+            <div class="form-group">
+                <label for="auth_pass">Passwort</label>
+                <input type="password" id="auth_pass" name="auth_pass" required autocomplete="current-password" placeholder="Passwort eingeben">
+            </div>
+
+            <button type="submit" name="accept" value="Erneut versuchen" class="btn-submit">Erneut versuchen</button>
+        </form>
+
+        <div class="footer">
+            &copy; 2026 KumarNet Gast
+        </div>
+    </div>
+
+    <script>
+    (function () {
+        var c = document.getElementById("network-bg");
+        var ctx = c.getContext("2d");
+        var pts = [];
+        var N, maxD;
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var pointer = { x: -1000, y: -1000, active: false };
+        var pointerRadius = 180;
+
+        function calcParams() {
+            var area = c.width * c.height;
+            N = Math.max(40, Math.min(100, Math.round(area / 12000)));
+            maxD = Math.max(120, Math.min(200, Math.round(Math.min(c.width, c.height) * 0.28)));
+        }
+
+        function resize() {
+            c.width = window.innerWidth;
+            c.height = window.innerHeight;
+            var oldN = pts.length;
+            calcParams();
+            while (pts.length < N) {
+                pts.push({
+                    x: Math.random() * c.width,
+                    y: Math.random() * c.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    r: Math.random() * 2 + 1.5
+                });
+            }
+            if (pts.length > N) pts.length = N;
+        }
+
+        function init() {
+            resize();
+        }
+
+        function frame() {
+            ctx.clearRect(0, 0, c.width, c.height);
+            var i, j, dx, dy, d, a, p;
+
+            for (i = 0; i < pts.length; i++) {
+                for (j = i + 1; j < pts.length; j++) {
+                    dx = pts[i].x - pts[j].x;
+                    dy = pts[i].y - pts[j].y;
+                    d = Math.sqrt(dx * dx + dy * dy);
+                    if (d < maxD) {
+                        a = 0.25 * (1 - d / maxD);
+                        ctx.beginPath();
+                        ctx.strokeStyle = "rgba(59,130,246," + a + ")";
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(pts[i].x, pts[i].y);
+                        ctx.lineTo(pts[j].x, pts[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            if (pointer.active) {
+                for (i = 0; i < pts.length; i++) {
+                    dx = pts[i].x - pointer.x;
+                    dy = pts[i].y - pointer.y;
+                    d = Math.sqrt(dx * dx + dy * dy);
+                    if (d < pointerRadius) {
+                        a = 0.3 * (1 - d / pointerRadius);
+                        ctx.beginPath();
+                        ctx.strokeStyle = "rgba(96,165,250," + a + ")";
+                        ctx.lineWidth = 1.2;
+                        ctx.moveTo(pts[i].x, pts[i].y);
+                        ctx.lineTo(pointer.x, pointer.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            for (i = 0; i < pts.length; i++) {
+                p = pts[i];
+                var glow = 0;
+                if (pointer.active) {
+                    dx = p.x - pointer.x;
+                    dy = p.y - pointer.y;
+                    d = Math.sqrt(dx * dx + dy * dy);
+                    if (d < pointerRadius) glow = 1 - d / pointerRadius;
+                }
+                var baseA = 0.5 + glow * 0.4;
+                var r = p.r + glow * 1.5;
+                ctx.beginPath();
+                ctx.fillStyle = "rgba(59,130,246," + baseA + ")";
+                ctx.arc(p.x, p.y, r, 0, 6.2832);
+                ctx.fill();
+            }
+
+            if (!reduced) {
+                for (i = 0; i < pts.length; i++) {
+                    p = pts[i];
+                    if (pointer.active) {
+                        dx = pointer.x - p.x;
+                        dy = pointer.y - p.y;
+                        d = Math.sqrt(dx * dx + dy * dy);
+                        if (d < pointerRadius && d > 1) {
+                            var force = 0.02 * (1 - d / pointerRadius);
+                            p.vx += (dx / d) * force;
+                            p.vy += (dy / d) * force;
+                        }
+                    }
+                    var speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+                    if (speed > 1.2) {
+                        p.vx *= 0.98;
+                        p.vy *= 0.98;
+                    }
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < 0 || p.x > c.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > c.height) p.vy *= -1;
+                    p.x = Math.max(0, Math.min(c.width, p.x));
+                    p.y = Math.max(0, Math.min(c.height, p.y));
+                }
+                requestAnimationFrame(frame);
+            }
+        }
+
+        function onPointer(e) {
+            var x, y;
+            if (e.touches && e.touches.length > 0) {
+                x = e.touches[0].clientX;
+                y = e.touches[0].clientY;
+            } else {
+                x = e.clientX;
+                y = e.clientY;
+            }
+            pointer.x = x;
+            pointer.y = y;
+            pointer.active = true;
+        }
+
+        function onPointerEnd() {
+            pointer.active = false;
+            pointer.x = -1000;
+            pointer.y = -1000;
+        }
+
+        init();
+        frame();
+        window.addEventListener("resize", resize);
+        window.addEventListener("mousemove", onPointer);
+        window.addEventListener("touchstart", onPointer, { passive: true });
+        window.addEventListener("touchmove", onPointer, { passive: true });
+        window.addEventListener("touchend", onPointerEnd);
+        window.addEventListener("mouseleave", onPointerEnd);
+    })();
+    </script>
+</body>
+</html>
