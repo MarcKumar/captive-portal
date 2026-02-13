@@ -328,25 +328,33 @@
         var ctx = c.getContext("2d");
         var pts = [];
         var N, maxD;
-        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var W = 0, H = 0;
+        var dpr = window.devicePixelRatio || 1;
         var pointer = { x: -1000, y: -1000, active: false };
         var pointerRadius = 180;
+        var nextFrame = window.requestAnimationFrame
+            || window.webkitRequestAnimationFrame
+            || function (fn) { return setTimeout(fn, 16); };
 
         function calcParams() {
-            var area = c.width * c.height;
+            var area = W * H;
             N = Math.max(40, Math.min(100, Math.round(area / 12000)));
-            maxD = Math.max(120, Math.min(200, Math.round(Math.min(c.width, c.height) * 0.28)));
+            maxD = Math.max(120, Math.min(200, Math.round(Math.min(W, H) * 0.28)));
         }
 
         function resize() {
-            c.width = window.innerWidth;
-            c.height = window.innerHeight;
-            var oldN = pts.length;
+            W = window.innerWidth || document.documentElement.clientWidth;
+            H = window.innerHeight || document.documentElement.clientHeight;
+            c.width = W * dpr;
+            c.height = H * dpr;
+            c.style.width = W + "px";
+            c.style.height = H + "px";
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             calcParams();
             while (pts.length < N) {
                 pts.push({
-                    x: Math.random() * c.width,
-                    y: Math.random() * c.height,
+                    x: Math.random() * W,
+                    y: Math.random() * H,
                     vx: (Math.random() - 0.5) * 0.5,
                     vy: (Math.random() - 0.5) * 0.5,
                     r: Math.random() * 2 + 1.5
@@ -355,12 +363,8 @@
             if (pts.length > N) pts.length = N;
         }
 
-        function init() {
-            resize();
-        }
-
         function frame() {
-            ctx.clearRect(0, 0, c.width, c.height);
+            ctx.clearRect(0, 0, W, H);
             var i, j, dx, dy, d, a, p;
 
             for (i = 0; i < pts.length; i++) {
@@ -414,33 +418,32 @@
                 ctx.fill();
             }
 
-            if (!reduced) {
-                for (i = 0; i < pts.length; i++) {
-                    p = pts[i];
-                    if (pointer.active) {
-                        dx = pointer.x - p.x;
-                        dy = pointer.y - p.y;
-                        d = Math.sqrt(dx * dx + dy * dy);
-                        if (d < pointerRadius && d > 1) {
-                            var force = 0.02 * (1 - d / pointerRadius);
-                            p.vx += (dx / d) * force;
-                            p.vy += (dy / d) * force;
-                        }
+            for (i = 0; i < pts.length; i++) {
+                p = pts[i];
+                if (pointer.active) {
+                    dx = pointer.x - p.x;
+                    dy = pointer.y - p.y;
+                    d = Math.sqrt(dx * dx + dy * dy);
+                    if (d < pointerRadius && d > 1) {
+                        var force = 0.02 * (1 - d / pointerRadius);
+                        p.vx += (dx / d) * force;
+                        p.vy += (dy / d) * force;
                     }
-                    var speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-                    if (speed > 1.2) {
-                        p.vx *= 0.98;
-                        p.vy *= 0.98;
-                    }
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    if (p.x < 0 || p.x > c.width) p.vx *= -1;
-                    if (p.y < 0 || p.y > c.height) p.vy *= -1;
-                    p.x = Math.max(0, Math.min(c.width, p.x));
-                    p.y = Math.max(0, Math.min(c.height, p.y));
                 }
-                requestAnimationFrame(frame);
+                var speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+                if (speed > 1.2) {
+                    p.vx *= 0.98;
+                    p.vy *= 0.98;
+                }
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0 || p.x > W) p.vx *= -1;
+                if (p.y < 0 || p.y > H) p.vy *= -1;
+                p.x = Math.max(0, Math.min(W, p.x));
+                p.y = Math.max(0, Math.min(H, p.y));
             }
+
+            nextFrame(frame);
         }
 
         function onPointer(e) {
@@ -463,9 +466,9 @@
             pointer.y = -1000;
         }
 
-        init();
-        frame();
-        window.addEventListener("resize", resize);
+        resize();
+        nextFrame(frame);
+        window.addEventListener("resize", function () { dpr = window.devicePixelRatio || 1; resize(); });
         window.addEventListener("mousemove", onPointer);
         window.addEventListener("touchstart", onPointer, { passive: true });
         window.addEventListener("touchmove", onPointer, { passive: true });
