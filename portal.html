@@ -266,6 +266,25 @@
             color: var(--color-success);
         }
 
+        /* ---- MOTD ---- */
+        .motd {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 0.625rem 0.75rem;
+            background: rgba(59, 130, 246, 0.06);
+            border: 1px solid rgba(59, 130, 246, 0.12);
+            border-radius: var(--input-radius);
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            font-style: italic;
+            min-height: 2.5em;
+            transition: opacity 0.4s ease;
+        }
+
+        .motd span {
+            color: #93C5FD;
+        }
+
         /* ---- System Info Panel ---- */
         .sys-info {
             margin-top: 1.5rem;
@@ -335,7 +354,7 @@
 
         <div class="header">
             <h1>KumarNet Gast</h1>
-            <p>Bitte melden Sie sich an, um das Netzwerk zu nutzen</p>
+            <p id="subtitle">Marcs Internet ist nicht umsonst... achso doch.</p>
         </div>
 
         <form method="POST" action="$PORTAL_ACTION$">
@@ -343,17 +362,19 @@
             <input type="hidden" name="zone" value="$PORTAL_ZONE$">
 
             <div class="form-group">
-                <label for="auth_user">Benutzername</label>
-                <input type="text" id="auth_user" name="auth_user" required autocomplete="username" placeholder="Benutzername eingeben" value="guest">
+                <label for="auth_user">Wer bist du?</label>
+                <input type="text" id="auth_user" name="auth_user" required autocomplete="username" placeholder="Dein Hackername" value="guest">
             </div>
 
             <div class="form-group">
-                <label for="auth_pass">Passwort</label>
-                <input type="password" id="auth_pass" name="auth_pass" required autofocus autocomplete="current-password" placeholder="Passwort eingeben">
+                <label for="auth_pass">Geheimcode</label>
+                <input type="password" id="auth_pass" name="auth_pass" required autofocus autocomplete="current-password" placeholder="Das Passwort ist nicht 'Passwort'">
             </div>
 
-            <button type="submit" name="accept" value="Anmelden" class="btn-submit">Anmelden</button>
+            <button type="submit" name="accept" value="Anmelden" class="btn-submit">Reinlassen bitte</button>
         </form>
+
+        <div class="motd" id="motd"></div>
 
         <div class="sys-info" id="sys-info">
             <div class="sys-info-title">System Info</div>
@@ -361,9 +382,65 @@
         </div>
 
         <div class="footer">
-            &copy; 2026 Marc Kumar
+            &copy; 2026 KumarNet &middot; Powered by Marcs Keller-Rack
         </div>
     </div>
+
+    <script>
+    (function () {
+        // Rotierende Untertitel
+        var subtitles = [
+            "Marcs Internet ist nicht umsonst... achso doch.",
+            "Bitte nicht das ganze Datenvolumen aufbrauchen.",
+            "Schneller als dein mobiles Netz. Wahrscheinlich.",
+            "Das WLAN-Passwort steht nicht auf dem Kuehlschrank.",
+            "Keine illegalen Downloads. Marc guckt zu.",
+            "Bandbreite ist begrenzt. Genau wie Marcs Geduld.",
+            "Willkommen im besten Netzwerk der Strasse.",
+            "Ja, Marc hat das selbst konfiguriert. Bitte.",
+            "5G haben wir nicht. Dafuer Liebe.",
+            "Dein eigenes WLAN ist bestimmt nicht so schoen."
+        ];
+        var subEl = document.getElementById("subtitle");
+        var subIdx = 0;
+        setInterval(function () {
+            subIdx = (subIdx + 1) % subtitles.length;
+            subEl.style.opacity = "0";
+            setTimeout(function () {
+                subEl.textContent = subtitles[subIdx];
+                subEl.style.opacity = "1";
+            }, 400);
+        }, 6000);
+        subEl.style.transition = "opacity 0.4s ease";
+
+        // Tipp des Tages / MOTD
+        var tips = [
+            "Tipp: <span>Das Passwort ist wirklich nicht 'Passwort'.</span>",
+            "Fun Fact: <span>Dieses Portal hat mehr CSS als manche Webseiten.</span>",
+            "Hinweis: <span>Marc sieht alles. ALLES.</span>",
+            "Info: <span>Dieses Netzwerk laeuft auf Kaffeemaschinen-Energie.</span>",
+            "Tipp: <span>Bei Problemen: Router aus, Router an, Marc anrufen.</span>",
+            "Reminder: <span>Bitte nach der Party das WLAN vergessen.</span>",
+            "Warnung: <span>Wer Netflix in 4K streamt, zahlt die Stromrechnung.</span>",
+            "Fun Fact: <span>Das Keller-Rack ist lauter als der Kuehlschrank.</span>",
+            "Pro-Tipp: <span>Frag Marc nach dem Passwort. Er liebt das.</span>",
+            "Achtung: <span>Marc loggt deine Suchanfragen. (Nein, tut er nicht.)</span>",
+            "Info: <span>Uptime seit dem letzten Stromausfall: wahrscheinlich lang.</span>",
+            "Tipp: <span>Das 5 GHz Netz ist schneller. Aber das weisst du ja.</span>"
+        ];
+        var motdEl = document.getElementById("motd");
+        var tipIdx = Math.floor(Math.random() * tips.length);
+        motdEl.innerHTML = tips[tipIdx];
+        setInterval(function () {
+            tipIdx = (tipIdx + 1) % tips.length;
+            motdEl.style.opacity = "0";
+            setTimeout(function () {
+                motdEl.innerHTML = tips[tipIdx];
+                motdEl.style.opacity = "1";
+            }, 400);
+        }, 8000);
+    })();
+    </script>
 
     <script>
     (function () {
