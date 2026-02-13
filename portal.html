@@ -266,6 +266,44 @@
             color: var(--color-success);
         }
 
+        /* ---- System Info Panel ---- */
+        .sys-info {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .sys-info-title {
+            font-family: "SF Mono", "Cascadia Code", "Fira Code", "Consolas", monospace;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-muted);
+            margin-bottom: 0.625rem;
+        }
+
+        .sys-info-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.25rem 0.75rem;
+            align-items: baseline;
+        }
+
+        .sys-info-label {
+            font-family: "SF Mono", "Cascadia Code", "Fira Code", "Consolas", monospace;
+            font-size: 0.6875rem;
+            color: var(--color-text-muted);
+            white-space: nowrap;
+        }
+
+        .sys-info-value {
+            font-family: "SF Mono", "Cascadia Code", "Fira Code", "Consolas", monospace;
+            font-size: 0.6875rem;
+            color: #93C5FD;
+            word-break: break-word;
+        }
+
         /* ---- Accessibility ---- */
         @media (prefers-reduced-motion: reduce) {
             .logo-wrap::before,
@@ -317,10 +355,105 @@
             <button type="submit" name="accept" value="Anmelden" class="btn-submit">Anmelden</button>
         </form>
 
+        <div class="sys-info" id="sys-info">
+            <div class="sys-info-title">System Info</div>
+            <div class="sys-info-grid" id="sys-info-grid"></div>
+        </div>
+
         <div class="footer">
             &copy; 2026 Marc Kumar
         </div>
     </div>
+
+    <script>
+    (function () {
+        var grid = document.getElementById("sys-info-grid");
+
+        function addRow(label, value) {
+            if (!value) return;
+            var l = document.createElement("span");
+            l.className = "sys-info-label";
+            l.textContent = label;
+            var v = document.createElement("span");
+            v.className = "sys-info-value";
+            v.textContent = value;
+            grid.appendChild(l);
+            grid.appendChild(v);
+        }
+
+        function parseUA() {
+            var ua = navigator.userAgent;
+            var os = "Unbekannt";
+            var browser = "Unbekannt";
+
+            if (/Windows NT 10/.test(ua)) os = "Windows 10/11";
+            else if (/Windows NT 6\.3/.test(ua)) os = "Windows 8.1";
+            else if (/Windows NT 6\.1/.test(ua)) os = "Windows 7";
+            else if (/Mac OS X ([\d_]+)/.test(ua)) os = "macOS " + RegExp.$1.replace(/_/g, ".");
+            else if (/CrOS/.test(ua)) os = "Chrome OS";
+            else if (/Android ([\d.]+)/.test(ua)) os = "Android " + RegExp.$1;
+            else if (/iPhone OS ([\d_]+)/.test(ua)) os = "iOS " + RegExp.$1.replace(/_/g, ".");
+            else if (/iPad.*OS ([\d_]+)/.test(ua)) os = "iPadOS " + RegExp.$1.replace(/_/g, ".");
+            else if (/Linux/.test(ua)) os = "Linux";
+
+            if (/Edg\/([\d.]+)/.test(ua)) browser = "Edge " + RegExp.$1;
+            else if (/OPR\/([\d.]+)/.test(ua)) browser = "Opera " + RegExp.$1;
+            else if (/Chrome\/([\d.]+)/.test(ua)) browser = "Chrome " + RegExp.$1.split(".")[0];
+            else if (/Version\/([\d.]+).*Safari/.test(ua)) browser = "Safari " + RegExp.$1;
+            else if (/Firefox\/([\d.]+)/.test(ua)) browser = "Firefox " + RegExp.$1;
+
+            return { os: os, browser: browser };
+        }
+
+        // Netzwerk
+        var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        if (conn) {
+            var parts = [];
+            if (conn.effectiveType) parts.push(conn.effectiveType.toUpperCase());
+            if (conn.downlink) parts.push(conn.downlink + " Mbps");
+            if (conn.rtt != null) parts.push(conn.rtt + "ms RTT");
+            if (parts.length) addRow("Netzwerk", parts.join(" \u00B7 "));
+        }
+
+        // Geraet (OS + Browser)
+        var info = parseUA();
+        addRow("Ger\u00E4t", info.os + " \u00B7 " + info.browser);
+
+        // Display
+        var sw = screen.width, sh = screen.height;
+        var dprVal = window.devicePixelRatio;
+        var displayParts = [sw + " \u00D7 " + sh];
+        if (dprVal) displayParts.push(dprVal + "x DPR");
+        addRow("Display", displayParts.join(" \u00B7 "));
+
+        // Hardware
+        var hwParts = [];
+        if (navigator.hardwareConcurrency) hwParts.push(navigator.hardwareConcurrency + " Cores");
+        if (navigator.deviceMemory) hwParts.push(navigator.deviceMemory + " GB RAM");
+        if (hwParts.length) addRow("Hardware", hwParts.join(" \u00B7 "));
+
+        // Akku (async)
+        if (navigator.getBattery) {
+            navigator.getBattery().then(function (bat) {
+                var level = Math.round(bat.level * 100) + "%";
+                var charging = bat.charging ? "Laden" : "Entladen";
+                addRow("Akku", level + " \u00B7 " + charging);
+            }).catch(function () {});
+        }
+
+        // Zeitzone
+        try {
+            var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            if (tz) addRow("Zeitzone", tz);
+        } catch (e) {}
+
+        // Sprache
+        if (navigator.language) addRow("Sprache", navigator.language);
+
+        // Online-Status
+        addRow("Status", navigator.onLine ? "Online" : "Offline");
+    })();
+    </script>
 
     <script>
     (function () {

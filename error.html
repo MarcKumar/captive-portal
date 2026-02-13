@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KumarNet Gast - Anmeldung fehlgeschlagen</title>
+    <title>SICHERHEITSVERSTOSS - KumarNet</title>
     <style>
         :root {
             --color-primary: #3B82F6;
@@ -65,25 +65,47 @@
             background: var(--color-card);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--color-card-border);
+            border: 1px solid rgba(248, 113, 113, 0.3);
             border-radius: var(--card-radius);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 80px rgba(59, 130, 246, 0.05);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 60px rgba(248, 113, 113, 0.08);
             width: 100%;
             max-width: var(--card-max-width);
             padding: 2.5rem 2rem;
             position: relative;
             z-index: 1;
-            animation: card-enter 0.6s ease-out both;
+            animation: card-enter 0.6s ease-out both, card-pulse 4s ease-in-out 1s infinite;
         }
 
         @keyframes card-enter {
-            from {
+            0% {
                 opacity: 0;
                 transform: translateY(20px);
             }
-            to {
+            30% {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateX(-6px);
+            }
+            45% {
+                transform: translateX(5px);
+            }
+            58% {
+                transform: translateX(-3px);
+            }
+            68% {
+                transform: translateX(2px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes card-pulse {
+            0%, 100% {
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 60px rgba(248, 113, 113, 0.08);
+            }
+            50% {
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 80px rgba(248, 113, 113, 0.15);
             }
         }
 
@@ -106,27 +128,27 @@
             width: 76px;
             height: 76px;
             border-radius: 50%;
-            border: 2px solid rgba(59, 130, 246, 0.3);
-            animation: pulse-glow 3s ease-in-out infinite;
+            border: 2px solid rgba(248, 113, 113, 0.4);
+            animation: pulse-glow 1.5s ease-in-out infinite;
         }
 
         .logo svg {
             width: 56px;
             height: 56px;
-            color: var(--color-primary);
-            filter: drop-shadow(0 0 8px var(--color-primary-glow));
+            color: #F87171;
+            filter: drop-shadow(0 0 12px rgba(248, 113, 113, 0.5));
         }
 
         @keyframes pulse-glow {
             0%, 100% {
                 transform: scale(1);
-                border-color: rgba(59, 130, 246, 0.3);
-                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+                border-color: rgba(248, 113, 113, 0.4);
+                box-shadow: 0 0 0 0 rgba(248, 113, 113, 0);
             }
             50% {
-                transform: scale(1.08);
-                border-color: rgba(59, 130, 246, 0.5);
-                box-shadow: 0 0 20px 4px rgba(59, 130, 246, 0.15);
+                transform: scale(1.15);
+                border-color: rgba(248, 113, 113, 0.7);
+                box-shadow: 0 0 25px 6px rgba(248, 113, 113, 0.2);
             }
         }
 
@@ -145,43 +167,6 @@
         .header p {
             color: var(--color-text-muted);
             font-size: 0.875rem;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 0.375rem;
-            color: var(--color-text-muted);
-        }
-
-        .form-group input[type="text"],
-        .form-group input[type="password"] {
-            width: 100%;
-            padding: 0.625rem 0.75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            border: 1px solid var(--color-border);
-            border-radius: var(--input-radius);
-            background-color: var(--color-input-bg);
-            color: var(--color-text);
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .form-group input[type="text"]::placeholder,
-        .form-group input[type="password"]::placeholder {
-            color: rgba(148, 163, 184, 0.5);
-        }
-
-        .form-group input[type="text"]:focus,
-        .form-group input[type="password"]:focus {
-            outline: none;
-            border-color: var(--color-input-focus);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2), 0 0 16px rgba(59, 130, 246, 0.1);
         }
 
         .btn-submit {
@@ -258,6 +243,88 @@
             color: var(--color-success);
         }
 
+        /* ---- Dramatic Error Styles ---- */
+        .threat-banner {
+            font-family: "SF Mono", "Cascadia Code", "Fira Code", "Consolas", monospace;
+            font-size: 0.6875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #F87171;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            animation: blink-text 2s step-end infinite;
+        }
+
+        @keyframes blink-text {
+            0%, 80% { opacity: 1; }
+            40%, 60% { opacity: 0; }
+        }
+
+        .incident-box {
+            background: rgba(248, 113, 113, 0.06);
+            border: 1px solid rgba(248, 113, 113, 0.15);
+            border-radius: var(--input-radius);
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.25rem;
+            font-family: "SF Mono", "Cascadia Code", "Fira Code", "Consolas", monospace;
+            font-size: 0.6875rem;
+            line-height: 1.8;
+            color: var(--color-text-muted);
+        }
+
+        .incident-box .il {
+            color: #94A3B8;
+        }
+
+        .incident-box .iv {
+            color: #F87171;
+            font-weight: 600;
+        }
+
+        .incident-box .iv-warn {
+            color: #FBBF24;
+        }
+
+        .countdown-wrap {
+            text-align: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .countdown-label {
+            font-family: "SF Mono", "Cascadia Code", "Fira Code", "Consolas", monospace;
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-muted);
+            margin-bottom: 0.375rem;
+        }
+
+        .countdown-timer {
+            font-family: "SF Mono", "Cascadia Code", "Fira Code", "Consolas", monospace;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #F87171;
+            letter-spacing: 0.05em;
+            text-shadow: 0 0 20px rgba(248, 113, 113, 0.4);
+        }
+
+        .consequence {
+            font-family: "SF Mono", "Cascadia Code", "Fira Code", "Consolas", monospace;
+            font-size: 0.625rem;
+            color: var(--color-text-muted);
+            text-align: center;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--color-border);
+            line-height: 1.6;
+            min-height: 2.4em;
+        }
+
+        .consequence span {
+            color: #FBBF24;
+        }
+
         @media (prefers-reduced-motion: reduce) {
             .logo-wrap::before,
             .card,
@@ -278,44 +345,123 @@
         <div class="logo">
             <div class="logo-wrap">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    <path d="M8.5 12.5c0-2 1.5-3.5 3.5-3.5s3.5 1.5 3.5 3.5" fill="none"/>
-                    <path d="M10 15c0-1.1.9-2 2-2s2 .9 2 2" fill="none"/>
-                    <circle cx="12" cy="17" r="0.5" fill="currentColor" stroke="none"/>
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
                 </svg>
             </div>
         </div>
 
+        <div class="threat-banner" aria-live="polite">SICHERHEITSVERSTOSS ERKANNT</div>
+
         <div class="header">
-            <h1>Anmeldung fehlgeschlagen</h1>
-            <p>Bitte Zugangsdaten prüfen und erneut versuchen</p>
+            <h1>Zugriff verweigert</h1>
+            <p>Unautorisierter Anmeldeversuch protokolliert</p>
+        </div>
+
+        <div class="incident-box" id="incident-box">
+            <div><span class="il">Vorfall-ID:</span> <span class="iv" id="incident-id">KN-000000</span></div>
+            <div><span class="il">Bedrohungsstufe:</span> <span class="iv">KRITISCH</span></div>
+            <div><span class="il">IP-Adresse:</span> <span class="iv-warn" id="fake-ip">wird ermittelt...</span></div>
+            <div><span class="il">MAC-Adresse:</span> <span class="iv-warn">erfasst & protokolliert</span></div>
+            <div><span class="il">Standort:</span> <span class="iv-warn" id="fake-loc">wird trianguliert...</span></div>
+        </div>
+
+        <div class="countdown-wrap">
+            <div class="countdown-label">Netzwerksperre in</div>
+            <div class="countdown-timer" id="countdown">05:00</div>
         </div>
 
         <div class="alert alert-error" role="alert">
             $PORTAL_MESSAGE$
         </div>
 
-        <form method="POST" action="$PORTAL_ACTION$">
-            <input type="hidden" name="redirurl" value="$PORTAL_REDIRURL$">
-            <input type="hidden" name="zone" value="$PORTAL_ZONE$">
+        <a href="$PORTAL_ACTION$" class="btn-submit" style="text-align:center;text-decoration:none;display:block">Erneut versuchen (auf eigene Gefahr)</a>
 
-            <div class="form-group">
-                <label for="auth_user">Benutzername</label>
-                <input type="text" id="auth_user" name="auth_user" required autofocus autocomplete="username" placeholder="Benutzername eingeben">
-            </div>
-
-            <div class="form-group">
-                <label for="auth_pass">Passwort</label>
-                <input type="password" id="auth_pass" name="auth_pass" required autocomplete="current-password" placeholder="Passwort eingeben">
-            </div>
-
-            <button type="submit" name="accept" value="Erneut versuchen" class="btn-submit">Erneut versuchen</button>
-        </form>
+        <div class="consequence" id="consequence"></div>
 
         <div class="footer">
-            &copy; 2026 KumarNet Gast
+            &copy; 2026 KumarNet Cyber Defense Unit
         </div>
     </div>
+
+    <script>
+    (function () {
+        // Fake Vorfall-ID
+        var id = "KN-" + Math.floor(100000 + Math.random() * 900000);
+        document.getElementById("incident-id").textContent = id;
+
+        // Fake IP nach kurzer Verzoegerung
+        setTimeout(function () {
+            var ip = Math.floor(Math.random() * 200 + 10) + "." +
+                     Math.floor(Math.random() * 255) + "." +
+                     Math.floor(Math.random() * 255) + "." +
+                     Math.floor(Math.random() * 255);
+            document.getElementById("fake-ip").textContent = ip;
+        }, 1200);
+
+        // Fake Standort nach laengerer Verzoegerung
+        var locs = [
+            "Wohnzimmer, Couch (links)",
+            "Klo, 2. OG (mit Handy)",
+            "Kueche, neben dem Kuehlschrank",
+            "Schlafzimmer, unter der Decke",
+            "Balkon, heimlich rauchend",
+            "Auto, Einfahrt (Motor laeuft)",
+            "Garten, hinter dem Busch",
+            "Keller, verdaechtig leise"
+        ];
+        setTimeout(function () {
+            document.getElementById("fake-loc").textContent =
+                locs[Math.floor(Math.random() * locs.length)];
+        }, 2800);
+
+        // Countdown Timer (zaehlt von 5:00 runter)
+        var total = 300;
+        var timerEl = document.getElementById("countdown");
+        var interval = setInterval(function () {
+            total--;
+            if (total <= 0) {
+                clearInterval(interval);
+                timerEl.textContent = "00:00";
+                return;
+            }
+            var m = Math.floor(total / 60);
+            var s = total % 60;
+            timerEl.textContent =
+                (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+        }, 1000);
+
+        // Rotierende absurde Konsequenzen
+        var consequences = [
+            "Dein WLAN-Verlauf wird an deine Mutter weitergeleitet.",
+            "Dein Spotify wechselt dauerhaft auf Volksmusik.",
+            "Alle deine Passwoerter werden zu 'Passwort123' geaendert.",
+            "Dein Handy spielt ab jetzt nur noch Klingeltoene von 2005.",
+            "Deine Suchhistorie wird als Instagram-Story gepostet.",
+            "Du wirst aus allen Gruppenchats entfernt. Allen.",
+            "Dein Netflix-Algorithmus wird auf Teletubbies zurueckgesetzt.",
+            "Die Mikrowelle wird gesperrt. Kein Popcorn mehr.",
+            "Dein Auto hupt jetzt jedes Mal wenn du luegst.",
+            "Marc wurde benachrichtigt. Er ist enttaeuscht.",
+            "Die Polizei wurde informiert. Sie bringen Pizza mit.",
+            "Dein Drucker druckt ab jetzt nur noch Comic Sans.",
+            "Alle deine Kontakte bekommen dein Foto von 2012.",
+            "Dein Router spielt jetzt Fahrstuhlmusik.",
+            "Du musst 3x 'Es tut mir leid, Marc' sagen.",
+            "Dein Kuehlschrank wurde informiert. Er oeffnet sich nicht mehr."
+        ];
+        var cEl = document.getElementById("consequence");
+        var cIdx = Math.floor(Math.random() * consequences.length);
+
+        function showConsequence() {
+            cEl.innerHTML = "<span>\u26A0 " + consequences[cIdx] + "</span>";
+            cIdx = (cIdx + 1) % consequences.length;
+        }
+        showConsequence();
+        setInterval(showConsequence, 5000);
+    })();
+    </script>
 
     <script>
     (function () {
@@ -370,7 +516,7 @@
                     if (d < maxD) {
                         a = 0.25 * (1 - d / maxD);
                         ctx.beginPath();
-                        ctx.strokeStyle = "rgba(59,130,246," + a + ")";
+                        ctx.strokeStyle = "rgba(248,113,113," + a + ")";
                         ctx.lineWidth = 1;
                         ctx.moveTo(pts[i].x, pts[i].y);
                         ctx.lineTo(pts[j].x, pts[j].y);
@@ -387,7 +533,7 @@
                     if (d < pointerRadius) {
                         a = 0.3 * (1 - d / pointerRadius);
                         ctx.beginPath();
-                        ctx.strokeStyle = "rgba(96,165,250," + a + ")";
+                        ctx.strokeStyle = "rgba(252,165,165," + a + ")";
                         ctx.lineWidth = 1.2;
                         ctx.moveTo(pts[i].x, pts[i].y);
                         ctx.lineTo(pointer.x, pointer.y);
@@ -408,7 +554,7 @@
                 var baseA = 0.5 + glow * 0.4;
                 var r = p.r + glow * 1.5;
                 ctx.beginPath();
-                ctx.fillStyle = "rgba(59,130,246," + baseA + ")";
+                ctx.fillStyle = "rgba(248,113,113," + baseA + ")";
                 ctx.arc(p.x, p.y, r, 0, 6.2832);
                 ctx.fill();
             }
