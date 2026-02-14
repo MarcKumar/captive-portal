@@ -40,9 +40,15 @@ Das war's. Drei HTML-Dateien. Kein Framework. Kein Build-Step. Kein `node_module
 - Button: "Erneut versuchen (auf eigene Gefahr)"
 - Powered by der "KumarNet Cyber Defense Unit"
 
-### logout.html - Die Verabschiedung
-- Gleicher huebscher Hintergrund
-- Schlichte Abmeldungsbestaetigung
+### logout.html - "Tschuess!"
+- Dramatischer Abschied mit Logout-Tuer-Icon
+- Rotierende traurige Untertitel: "Das WLAN weint leise." / "Die Partikel sind jetzt traurig."
+- Fake Session-Statistiken die nacheinander eingeblendet werden
+- Datenverbrauch wie "420 MB (nice)" oder "3.7 GB (Alter!)"
+- DNS-Anfragen: "4.832 (was hast du gesucht?!)"
+- Marcs Reaktion: "Dreht sich dramatisch zum Fenster"
+- Rotierende Abschiedssprueche: "Du kannst das Netzwerk vergessen. Aber es vergisst dich nicht."
+- Button: "Doch nochmal reinlassen"
 
 ## Technische Details
 
@@ -96,6 +102,15 @@ A: Damit du nur noch das Passwort eingeben musst. Marc denkt an alles.
 
 **Q: Wie ist das Passwort?**
 A: Frag Marc. Er liebt das.
+
+**Q: Warum ist die Logout-Seite so dramatisch?**
+A: Weil Abschiede wehtun. Auch von WLAN-Netzwerken.
+
+**Q: Stimmen die Session-Statistiken auf der Logout-Seite?**
+A: Nein. Aber 420 MB ist trotzdem nice.
+
+**Q: Hat dieses Portal wirklich mehr Aufwand als manche Bachelorarbeit?**
+A: Ja. Und es funktioniert sogar.
 
 ## Lizenz
 
