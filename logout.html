@@ -315,17 +315,26 @@
         // Fake Session-Statistiken mit Verzoegerung einblenden
         var durations = [
             "2 Std 14 Min", "47 Min", "1 Std 03 Min", "3 Std 42 Min",
-            "23 Min", "5 Std 01 Min", "11 Min (Speedrun)", "8 Std 17 Min (Respekt)"
+            "23 Min", "5 Std 01 Min", "11 Min (Speedrun)", "8 Std 17 Min (Respekt)",
+            "0 Std 02 Min (Warum?)", "14 Std 33 Min (Bist du eingezogen?)",
+            "1 Std 59 Min (Knapp unter dem Limit)", "37 Sek (Neuer Rekord!)",
+            "6 Std 06 Min (666... Zufall?)", "4 Std 20 Min (nice)"
         ];
         var datas = [
             "1.3 GB (Netflix?)", "420 MB (nice)", "69 MB (nice)", "3.7 GB (Alter!)",
             "256 MB (bescheiden)", "2.1 GB (Marc zahlt die Rechnung)",
-            "847 MB (solide)", "12 MB (warst du ueberhaupt online?)"
+            "847 MB (solide)", "12 MB (warst du ueberhaupt online?)",
+            "7.4 GB (Marc bekommt Herzrasen)", "0.3 MB (nur Captive Portal geladen?)",
+            "1.337 GB (Elite-Nutzer)", "4.2 GB (War das ein Windows-Update?)",
+            "512 MB (exakt eine halbe CD-ROM)", "69.420 MB (Internet-Legende)"
         ];
         var dnsCounts = [
             "1.247 (normal)", "4.832 (was hast du gesucht?!)",
             "347 (Minimalist)", "12.408 (DNS geht brrr)",
-            "2.891 (Durchschnitt)", "69 (nice)", "8.421 (Poweruser)"
+            "2.891 (Durchschnitt)", "69 (nice)", "8.421 (Poweruser)",
+            "1 (hast du nur Google aufgerufen?)", "42.069 (absoluter Wahnsinn)",
+            "404 (not found... moment)", "999 (knapp an 1000 vorbei)",
+            "3 (Respekt fuer die Disziplin)", "31.337 (1337 detected)"
         ];
         var reactions = [
             "Enttaeuscht aber nicht ueberrascht",
@@ -335,7 +344,15 @@
             "Checkt ob du den Kuehlschrank leer gemacht hast",
             "Aendert sofort das Passwort",
             "Dreht sich dramatisch zum Fenster",
-            "War eh Zeit fuer ein Firmware-Update"
+            "War eh Zeit fuer ein Firmware-Update",
+            "Starrt 10 Minuten auf den Traffic-Graphen",
+            "Macht sich einen Trost-Kaffee",
+            "Ueberlegt, ob das Netzwerk an allem Schuld ist",
+            "Schreibt boesen Brief an den ISP",
+            "Loescht deine MAC-Adresse aus Trotz",
+            "Faengt an, die Firewall-Regeln umzuschreiben",
+            "Redet beruhigend auf den Server ein",
+            "Googelt 'Wie halte ich Gaeste im WLAN'"
         ];
 
         function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
@@ -361,7 +378,16 @@
             "Die Partikel sind jetzt traurig.",
             "War schoen mit dir. Wirklich.",
             "Der Router fuehlt sich leer.",
-            "Marc fragt: War's was ich gesagt hab?"
+            "Marc fragt: War's was ich gesagt hab?",
+            "Die Firewall hat dich gern gehabt.",
+            "Ein Paket kommt nicht mehr an. Deins.",
+            "Der DHCP-Server gibt deine IP schon weiter.",
+            "Marc schaut traurig auf den Traffic-Graphen.",
+            "Dein Geraet wurde aus der ARP-Tabelle gestrichen.",
+            "Die Bandbreite ist jetzt fuer Marc allein.",
+            "Der Switch blinkt jetzt ein bisschen langsamer.",
+            "Ping Timeout. So wie unsere Freundschaft.",
+            "Connection reset by feelings."
         ];
         var subEl = document.getElementById("subtitle");
         var subIdx = 0;
@@ -384,7 +410,19 @@
             "<span>Dein Platz im Netzwerk wird 30 Sekunden freigehalten. Vielleicht.</span>",
             "<span>Falls du dein eigenes WLAN vermisst: Es ist langsamer. Nur so.</span>",
             "<span>Marc bedankt sich fuer deinen Beitrag zur Stromrechnung.</span>",
-            "<span>Dieses Portal hatte mehr Aufwand als manche Bachelorarbeit.</span>"
+            "<span>Dieses Portal hatte mehr Aufwand als manche Bachelorarbeit.</span>",
+            "<span>Dein Router zu Hause weiss, dass du fremdgegangen bist.</span>",
+            "<span>Marc hat fuer dich extra den QoS hochgedreht. Undankbar.</span>",
+            "<span>Die Pakete, die du nie empfangen wirst... ruhe in Frieden.</span>",
+            "<span>Dein ISP lacht gerade. Willkommen zurueck im Mittelalter.</span>",
+            "<span>Marc wuenscht dir viel Spass mit deinen 3 Balken LTE.</span>",
+            "<span>Falls du wiederkommst: Das Passwort hat sich nicht geaendert. Oder?</span>",
+            "<span>Dieser Logout wurde in den Akten vermerkt. Fuer immer.</span>",
+            "<span>Marc ueberlegt, ob er das Passwort aendert. Deinetwegen.</span>",
+            "<span>Du warst der beste Gast seit... nee, warst du nicht.</span>",
+            "<span>Der Keller-Server brummt jetzt ein bisschen leiser.</span>",
+            "<span>Vielen Dank fuer die zusaetzlichen Cents auf der Stromrechnung.</span>",
+            "<span>Marcs Netzwerk: 99.9% Uptime. Deine Treue: offenbar nicht.</span>"
         ];
         var fwEl = document.getElementById("farewell");
         var fwIdx = Math.floor(Math.random() * farewells.length);
