@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Tschuess - KumarNet</title>
     <style>
         :root {
@@ -11,7 +11,7 @@
             --color-primary-glow: rgba(59, 130, 246, 0.4);
             --color-bg-dark: #0F172A;
             --color-bg-light: #1E293B;
-            --color-card: rgba(255, 255, 255, 0.02);
+            --color-card: rgba(255, 255, 255, 0.06);
             --color-card-border: rgba(255, 255, 255, 0.12);
             --color-text: #F1F5F9;
             --color-text-muted: #94A3B8;
@@ -27,6 +27,15 @@
             --card-max-width: 420px;
             --card-radius: 16px;
             --input-radius: 10px;
+            --font-size-h1: clamp(1.25rem, 4vw, 1.5rem);
+            --font-size-body: clamp(0.8125rem, 2.5vw, 0.875rem);
+            --card-padding-x: clamp(1.25rem, 5vw, 2rem);
+            --card-padding-y: clamp(1.75rem, 6vw, 2.5rem);
+            --min-touch-target: 44px;
+            --card-blur: 20px;
+            --transition-fast: 0.15s ease;
+            --transition-base: 0.25s ease;
+            --transition-slow: 0.4s ease;
         }
 
         *,
@@ -42,13 +51,17 @@
             background: linear-gradient(135deg, var(--color-bg-dark) 0%, var(--color-bg-light) 50%, var(--color-bg-dark) 100%);
             color: var(--color-text);
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 1rem;
+            padding: env(safe-area-inset-top, 1rem) env(safe-area-inset-right, 1rem) env(safe-area-inset-bottom, 1rem) env(safe-area-inset-left, 1rem);
             line-height: 1.5;
-            overflow: hidden;
+            overflow-y: auto;
             position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         #network-bg {
@@ -63,17 +76,31 @@
 
         .card {
             background: var(--color-card);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(var(--card-blur)) saturate(1.3);
+            -webkit-backdrop-filter: blur(var(--card-blur)) saturate(1.3);
             border: 1px solid var(--color-card-border);
+            border-top-color: rgba(255, 255, 255, 0.18);
             border-radius: var(--card-radius);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 80px rgba(59, 130, 246, 0.05);
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.25),
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 80px rgba(59, 130, 246, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
             width: 100%;
             max-width: var(--card-max-width);
-            padding: 2.5rem 2rem;
+            padding: var(--card-padding-y) var(--card-padding-x);
             position: relative;
             z-index: 1;
             animation: card-enter 0.6s ease-out both;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         @keyframes card-enter {
@@ -136,7 +163,7 @@
         }
 
         .header h1 {
-            font-size: 1.5rem;
+            font-size: var(--font-size-h1);
             font-weight: 700;
             margin-bottom: 0.25rem;
             color: var(--color-text);
@@ -144,13 +171,14 @@
 
         .header p {
             color: var(--color-text-muted);
-            font-size: 0.875rem;
+            font-size: var(--font-size-body);
         }
 
         .btn-submit {
             display: block;
             width: 100%;
             padding: 0.75rem 1rem;
+            min-height: var(--min-touch-target);
             font-size: 1rem;
             font-weight: 600;
             color: #FFFFFF;
@@ -158,10 +186,11 @@
             border: none;
             border-radius: var(--input-radius);
             cursor: pointer;
-            transition: box-shadow 0.2s ease, transform 0.1s ease;
+            transition: box-shadow var(--transition-base), transform var(--transition-fast), filter var(--transition-fast);
             margin-top: 1.5rem;
             position: relative;
             overflow: hidden;
+            touch-action: manipulation;
         }
 
         .btn-submit::after {
@@ -181,30 +210,42 @@
         }
 
         .btn-submit:hover {
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+            filter: brightness(1.08);
+            box-shadow:
+                0 4px 12px rgba(59, 130, 246, 0.3),
+                0 8px 24px rgba(59, 130, 246, 0.2);
             transform: translateY(-1px);
         }
 
         .btn-submit:active {
-            transform: translateY(0);
+            transform: scale(0.98);
+            filter: brightness(0.95);
         }
 
         .btn-submit:focus-visible {
-            outline: 2px solid var(--color-primary);
-            outline-offset: 2px;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5), 0 0 0 6px rgba(59, 130, 246, 0.2);
         }
 
         .footer {
             text-align: center;
             margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-border);
             font-size: 0.75rem;
             color: var(--color-text-muted);
+            opacity: 0.7;
+            transition: opacity var(--transition-base);
+        }
+
+        .footer:hover {
+            opacity: 1;
         }
 
         .alert {
             padding: 0.75rem 1rem;
             border-radius: var(--input-radius);
-            font-size: 0.875rem;
+            font-size: var(--font-size-body);
             margin-bottom: 1.5rem;
             border: 1px solid;
         }
@@ -234,6 +275,17 @@
             color: var(--color-text-muted);
         }
 
+        .session-stats > div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 0.25rem;
+            padding: 0.25rem 0;
+        }
+
+        .session-stats > div + div {
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
         .session-stats .sl {
             color: #94A3B8;
         }
@@ -244,29 +296,67 @@
         }
 
         .farewell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             margin-top: 1rem;
             padding: 0.625rem 0.75rem;
+            background: rgba(59, 130, 246, 0.04);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            border-radius: var(--input-radius);
             font-size: 0.75rem;
             color: var(--color-text-muted);
             font-style: italic;
             min-height: 2.5em;
-            transition: opacity 0.4s ease;
+            transition: opacity var(--transition-slow);
         }
 
         .farewell span {
             color: #93C5FD;
         }
 
+        /* ---- Responsive Breakpoints ---- */
+        @media (max-width: 380px) {
+            :root {
+                --card-radius: 12px;
+                --input-radius: 8px;
+            }
+            .logo svg { width: 48px; height: 48px; }
+            .logo-wrap::before { width: 66px; height: 66px; }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            .card { padding: 1rem var(--card-padding-x); }
+            .logo { margin-bottom: 0.75rem; }
+            .logo svg { width: 36px; height: 36px; }
+            .logo-wrap::before { width: 52px; height: 52px; }
+            .header { margin-bottom: 0.75rem; }
+            .btn-submit { margin-top: 0.75rem; }
+            .farewell { margin-top: 0.5rem; }
+        }
+
+        @media (min-width: 768px) {
+            :root { --card-max-width: 460px; }
+        }
+
+        @media (min-width: 1200px) {
+            :root { --card-max-width: 480px; }
+        }
+
+        /* ---- Accessibility ---- */
         @media (prefers-reduced-motion: reduce) {
-            .logo-wrap::before,
-            .card,
-            .btn-submit::after {
-                animation: none;
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
             .card {
                 opacity: 1;
                 transform: none;
+            }
+            #network-bg {
+                display: none;
             }
         }
     </style>
@@ -446,6 +536,7 @@
         var N, maxD;
         var W = 0, H = 0;
         var dpr = window.devicePixelRatio || 1;
+        var isMobile = window.innerWidth < 768;
         var pointer = { x: -1000, y: -1000, active: false };
         var pointerRadius = 180;
         var nextFrame = window.requestAnimationFrame
@@ -454,13 +545,19 @@
 
         function calcParams() {
             var area = W * H;
-            N = Math.max(40, Math.min(100, Math.round(area / 12000)));
-            maxD = Math.max(120, Math.min(200, Math.round(Math.min(W, H) * 0.28)));
+            if (isMobile) {
+                N = Math.max(25, Math.min(50, Math.round(area / 18000)));
+                maxD = Math.max(100, Math.min(160, Math.round(Math.min(W, H) * 0.22)));
+            } else {
+                N = Math.max(40, Math.min(100, Math.round(area / 12000)));
+                maxD = Math.max(120, Math.min(200, Math.round(Math.min(W, H) * 0.28)));
+            }
         }
 
         function resize() {
             W = window.innerWidth || document.documentElement.clientWidth;
             H = window.innerHeight || document.documentElement.clientHeight;
+            isMobile = W < 768;
             c.width = W * dpr;
             c.height = H * dpr;
             c.style.width = W + "px";

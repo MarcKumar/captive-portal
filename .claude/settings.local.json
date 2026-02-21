@@ -5,7 +5,11 @@
       "WebFetch(domain:docs.netgate.com)",
       "WebFetch(domain:github.com)",
       "Bash(dir:*)",
-      "WebFetch(domain:redmine.pfsense.org)"
+      "WebFetch(domain:redmine.pfsense.org)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)"
     ]
   }
 }
