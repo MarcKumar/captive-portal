@@ -7,35 +7,59 @@
     <style>
         :root {
             --brand-hue: 210;
-            --brand-sat: 85%;
-            --brand-light: 58%;
-            --color-primary: hsl(var(--brand-hue), var(--brand-sat), var(--brand-light));
-            --color-primary-hover: hsl(var(--brand-hue), 90%, 48%);
-            --color-primary-glow: hsla(var(--brand-hue), 85%, 58%, 0.35);
-            --color-bg-dark: hsl(222, 47%, 8%);
-            --color-bg-mid: hsl(217, 33%, 17%);
-            --color-bg-light: hsl(217, 28%, 14%);
-            --color-card: hsla(220, 40%, 8%, 0.72);
-            --color-card-border: hsla(210, 30%, 40%, 0.15);
-            --color-text: hsl(210, 20%, 94%);
-            --color-text-muted: hsl(210, 15%, 60%);
-            --color-border: hsla(210, 20%, 70%, 0.12);
-            --color-input-bg: hsla(222, 47%, 6%, 0.6);
-            --color-focus-ring: hsla(var(--brand-hue), 85%, 58%, 0.25);
-            --color-error: hsl(0, 72%, 60%);
-            --color-success: hsl(142, 69%, 58%);
-            --card-max-width: 440px;
-            --card-radius: 20px;
-            --input-radius: 12px;
-            --font-size-h1: clamp(1.5rem, 5vw, 1.875rem);
-            --font-size-body: clamp(0.875rem, 2vw, 1rem);
-            --card-padding-x: clamp(1.5rem, 5vw, 2.5rem);
-            --card-padding-y: clamp(2rem, 6vw, 3rem);
-            --min-touch-target: 52px;
-            --card-blur: 28px;
-            --transition-fast: 0.12s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --brand-sat: 80%;
+            --brand-light: 60%;
+
+            --color-primary:        hsl(var(--brand-hue), var(--brand-sat), var(--brand-light));
+            --color-primary-deep:   hsl(var(--brand-hue), 85%, 45%);
+            --color-primary-hover:  hsl(var(--brand-hue), 90%, 52%);
+            --color-primary-glow:   hsla(var(--brand-hue), 80%, 60%, 0.28);
+            --color-primary-subtle: hsla(var(--brand-hue), 70%, 60%, 0.08);
+
+            --color-gold:           hsl(42, 75%, 62%);
+            --color-gold-glow:      hsla(42, 80%, 62%, 0.18);
+
+            --color-bg-darkest:     hsl(224, 55%, 5%);
+            --color-bg-dark:        hsl(222, 50%, 7%);
+            --color-bg-mid:         hsl(220, 38%, 11%);
+            --color-bg-light:       hsl(218, 32%, 14%);
+
+            --color-card:           hsla(222, 45%, 7%, 0.15);
+            --color-card-border:    hsla(210, 40%, 65%, 0.22);
+            --color-card-sheen:     hsla(210, 50%, 85%, 0.04);
+
+            --color-text:           hsl(210, 18%, 96%);
+            --color-text-muted:     hsl(215, 14%, 58%);
+            --color-text-faint:     hsl(215, 12%, 40%);
+
+            --color-border:         hsla(215, 20%, 70%, 0.09);
+            --color-border-mid:     hsla(215, 20%, 70%, 0.14);
+            --color-input-bg:       hsla(224, 50%, 5%, 0.65);
+            --color-focus-ring:     hsla(var(--brand-hue), 80%, 60%, 0.20);
+
+            --color-error:          hsl(0, 70%, 62%);
+            --color-success:        hsl(152, 60%, 52%);
+
+            --card-max-width:       440px;
+            --card-radius:          22px;
+            --input-radius:         13px;
+            --btn-radius:           13px;
+
+            --font-size-h1:         clamp(1.45rem, 5vw, 1.825rem);
+            --font-size-body:       clamp(0.875rem, 2vw, 0.9375rem);
+            --font-size-small:      0.8125rem;
+            --font-size-xs:         0.75rem;
+
+            --card-padding-x:       clamp(1.75rem, 5.5vw, 2.75rem);
+            --card-padding-y:       clamp(2.25rem, 6vw, 3.25rem);
+
+            --min-touch-target:     52px;
+            --card-blur:            6px;
+
+            --transition-fast:      0.14s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base:      0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow:      0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-spring:    0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         *, *::before, *::after {
@@ -51,19 +75,20 @@
 
         body {
             font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
-            background: 
-                radial-gradient(ellipse 80% 60% at 50% 0%, hsla(var(--brand-hue), 60%, 25%, 0.15) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 40% at 80% 100%, hsla(250, 50%, 30%, 0.12) 0%, transparent 50%),
-                linear-gradient(165deg, var(--color-bg-dark) 0%, var(--color-bg-mid) 40%, var(--color-bg-light) 100%);
+            background:
+                radial-gradient(ellipse 100% 55% at 50% -10%, hsla(var(--brand-hue), 70%, 20%, 0.22) 0%, transparent 65%),
+                radial-gradient(ellipse 70% 50% at 15% 110%, hsla(250, 60%, 22%, 0.16) 0%, transparent 55%),
+                radial-gradient(ellipse 55% 45% at 90% 90%, hsla(200, 50%, 18%, 0.12) 0%, transparent 50%),
+                linear-gradient(168deg, var(--color-bg-darkest) 0%, var(--color-bg-dark) 30%, var(--color-bg-mid) 65%, var(--color-bg-light) 100%);
             color: var(--color-text);
             min-height: 100vh;
             min-height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.25rem;
-            padding: max(1.25rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right)) max(1.25rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left));
-            line-height: 1.55;
+            padding: 1.5rem;
+            padding: max(1.5rem, env(safe-area-inset-top)) max(1.5rem, env(safe-area-inset-right)) max(1.5rem, env(safe-area-inset-bottom)) max(1.5rem, env(safe-area-inset-left));
+            line-height: 1.6;
             overflow-y: auto;
             position: relative;
             -webkit-font-smoothing: antialiased;
@@ -72,57 +97,70 @@
 
         #network-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 0;
             pointer-events: none;
+            opacity: 1;
         }
 
+        /* ── Card ── */
         .card {
             background: var(--color-card);
-            backdrop-filter: blur(var(--card-blur)) saturate(1.4);
-            -webkit-backdrop-filter: blur(var(--card-blur)) saturate(1.4);
+            backdrop-filter: blur(var(--card-blur)) saturate(1.2);
+            -webkit-backdrop-filter: blur(var(--card-blur)) saturate(1.2);
             border: 1px solid var(--color-card-border);
             border-radius: var(--card-radius);
-            box-shadow: 
-                0 0 0 1px rgba(255, 255, 255, 0.03),
-                0 4px 24px rgba(0, 0, 0, 0.4),
-                0 16px 48px rgba(0, 0, 0, 0.35),
-                0 0 120px -20px var(--color-primary-glow);
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.04),
+                0 2px 4px rgba(0, 0, 0, 0.35),
+                0 8px 32px rgba(0, 0, 0, 0.45),
+                0 24px 64px rgba(0, 0, 0, 0.38),
+                0 0 100px -24px var(--color-primary-glow);
             width: 100%;
             max-width: var(--card-max-width);
             padding: var(--card-padding-y) var(--card-padding-x);
             position: relative;
             z-index: 1;
-            animation: card-enter 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+            animation: card-enter 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
+        /* top-edge sheen */
         .card::before {
             content: "";
             position: absolute;
             inset: 0;
             border-radius: inherit;
-            background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 50%, rgba(255,255,255,0.02) 100%);
+            background:
+                linear-gradient(135deg,
+                    rgba(255,255,255,0.055) 0%,
+                    rgba(255,255,255,0.015) 30%,
+                    transparent 60%,
+                    rgba(255,255,255,0.02) 100%);
+            pointer-events: none;
+        }
+
+        /* subtle top-border highlight */
+        .card::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 10%; right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent);
+            border-radius: 50%;
             pointer-events: none;
         }
 
         @keyframes card-enter {
-            from {
-                opacity: 0;
-                transform: translateY(16px) scale(0.98);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from { opacity: 0; transform: translateY(20px) scale(0.975); }
+            to   { opacity: 1; transform: translateY(0)   scale(1); }
         }
 
+        /* ── Logo ── */
         .logo {
             display: flex;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.25rem;
         }
 
         .logo-wrap {
@@ -134,59 +172,66 @@
             height: 80px;
         }
 
+        /* rotating arc */
         .logo-wrap::before {
             content: "";
             position: absolute;
-            inset: -4px;
+            inset: -5px;
             border-radius: 50%;
-            border: 1.5px solid transparent;
-            background: linear-gradient(135deg, var(--color-primary), transparent 60%) border-box;
+            border: 1px solid transparent;
+            background:
+                linear-gradient(135deg, var(--color-primary) 0%, var(--color-gold) 35%, transparent 60%) border-box;
             -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
-            animation: logo-ring 4s ease-in-out infinite;
+            animation: logo-arc 5s ease-in-out infinite;
+            opacity: 0.9;
         }
 
+        /* ambient glow */
         .logo-wrap::after {
             content: "";
             position: absolute;
-            inset: -12px;
+            inset: -18px;
             border-radius: 50%;
-            background: radial-gradient(circle, var(--color-primary-glow) 0%, transparent 70%);
-            opacity: 0.5;
-            animation: logo-glow 3s ease-in-out infinite alternate;
+            background: radial-gradient(circle, var(--color-primary-glow) 0%, transparent 68%);
+            animation: logo-breathe 4s ease-in-out infinite alternate;
         }
 
-        @keyframes logo-ring {
-            0%, 100% { transform: rotate(0deg); opacity: 1; }
-            50% { transform: rotate(180deg); opacity: 0.7; }
+        @keyframes logo-arc {
+            0%, 100% { transform: rotate(0deg);   opacity: 0.85; }
+            50%       { transform: rotate(200deg); opacity: 1; }
         }
 
-        @keyframes logo-glow {
-            0% { transform: scale(1); opacity: 0.3; }
-            100% { transform: scale(1.1); opacity: 0.6; }
+        @keyframes logo-breathe {
+            0%   { transform: scale(0.92); opacity: 0.25; }
+            100% { transform: scale(1.08); opacity: 0.55; }
         }
 
         .logo svg {
-            width: 44px;
-            height: 44px;
+            width: 42px;
+            height: 42px;
             color: var(--color-primary);
-            filter: drop-shadow(0 2px 8px var(--color-primary-glow));
+            filter: drop-shadow(0 2px 10px var(--color-primary-glow));
             position: relative;
             z-index: 1;
         }
 
+        /* ── Header ── */
         .header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.25rem;
         }
 
         .header h1 {
             font-size: var(--font-size-h1);
             font-weight: 600;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #fff 0%, hsla(210, 20%, 90%, 0.85) 100%);
+            letter-spacing: -0.03em;
+            margin-bottom: 0.55rem;
+            background: linear-gradient(140deg,
+                #fff 0%,
+                hsl(210, 30%, 92%) 55%,
+                hsl(210, 20%, 82%) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -197,19 +242,28 @@
             font-size: var(--font-size-body);
             font-weight: 400;
             letter-spacing: 0.01em;
+            transition: opacity var(--transition-slow);
         }
 
+        /* ── Divider ── */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-border-mid), transparent);
+            margin: 0 -0.5rem 2rem;
+        }
+
+        /* ── Form ── */
         .form-group {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.35rem;
         }
 
         .form-group label {
             display: block;
-            font-size: 0.8125rem;
+            font-size: var(--font-size-small);
             font-weight: 500;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.55rem;
             color: var(--color-text-muted);
-            letter-spacing: 0.02em;
+            letter-spacing: 0.025em;
             transition: color var(--transition-fast);
         }
 
@@ -219,16 +273,17 @@
 
         .form-group input {
             width: 100%;
-            padding: 0.875rem 1rem;
-            font-size: 1rem;
+            padding: 0.9rem 1.1rem;
+            font-size: 0.9375rem;
             font-weight: 400;
             line-height: 1.5;
+            font-family: inherit;
             min-height: var(--min-touch-target);
-            border: 1.5px solid var(--color-border);
+            border: 1px solid var(--color-border-mid);
             border-radius: var(--input-radius);
             background: var(--color-input-bg);
             color: var(--color-text);
-            transition: 
+            transition:
                 border-color var(--transition-base),
                 box-shadow var(--transition-base),
                 background-color var(--transition-base);
@@ -237,158 +292,170 @@
         }
 
         .form-group input::placeholder {
-            color: hsla(210, 15%, 60%, 0.5);
+            color: var(--color-text-faint);
+            font-style: normal;
         }
 
-        .form-group input:hover {
-            border-color: hsla(210, 20%, 70%, 0.25);
+        .form-group input:hover:not(:focus) {
+            border-color: hsla(215, 20%, 70%, 0.22);
+            background: hsla(224, 50%, 6%, 0.7);
         }
 
         .form-group input:focus {
             outline: none;
             border-color: var(--color-primary);
-            background: hsla(222, 47%, 6%, 0.8);
-            box-shadow: 
-                0 0 0 4px var(--color-focus-ring),
-                0 4px 12px rgba(0, 0, 0, 0.25);
+            background: hsla(224, 50%, 5%, 0.85);
+            box-shadow:
+                0 0 0 3px var(--color-focus-ring),
+                0 4px 16px rgba(0, 0, 0, 0.3);
         }
 
+        /* ── Button ── */
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 0.5rem;
             width: 100%;
-            padding: 0.875rem 1.5rem;
+            padding: 0.9rem 1.5rem;
             min-height: var(--min-touch-target);
-            font-size: 1rem;
+            font-size: 0.9375rem;
             font-weight: 600;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.015em;
+            font-family: inherit;
             color: #fff;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+            background: linear-gradient(135deg,
+                var(--color-primary) 0%,
+                var(--color-primary-deep) 100%);
             border: none;
-            border-radius: var(--input-radius);
+            border-radius: var(--btn-radius);
             cursor: pointer;
-            transition: 
+            transition:
                 box-shadow var(--transition-base),
                 transform var(--transition-fast),
                 filter var(--transition-base);
-            margin-top: 1.75rem;
+            margin-top: 1.85rem;
             position: relative;
             overflow: hidden;
             -webkit-appearance: none;
             appearance: none;
         }
 
+        /* gloss sheen */
         .btn::before {
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
-            opacity: 0;
+            background: linear-gradient(160deg,
+                rgba(255,255,255,0.18) 0%,
+                rgba(255,255,255,0.05) 40%,
+                transparent 65%);
+            opacity: 1;
             transition: opacity var(--transition-base);
         }
 
+        /* hover shimmer sweep */
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 0; left: -120%;
+            width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+            transition: left 0.6s ease;
+        }
+
         .btn:hover {
-            filter: brightness(1.08);
-            box-shadow: 
-                0 6px 20px rgba(59, 130, 246, 0.35),
-                0 12px 32px rgba(59, 130, 246, 0.2);
+            filter: brightness(1.1);
+            box-shadow:
+                0 4px 16px var(--color-primary-glow),
+                0 10px 36px rgba(0, 0, 0, 0.3);
             transform: translateY(-2px);
         }
 
-        .btn:hover::before {
-            opacity: 1;
+        .btn:hover::after {
+            left: 160%;
         }
 
         .btn:active {
-            transform: translateY(0) scale(0.99);
-            filter: brightness(0.95);
+            transform: translateY(0) scale(0.985);
+            filter: brightness(0.94);
+            transition-duration: 0.08s;
         }
 
         .btn:focus-visible {
             outline: none;
-            box-shadow: 
-                0 0 0 3px var(--color-card),
-                0 0 0 6px var(--color-focus-ring),
-                0 6px 20px rgba(59, 130, 246, 0.25);
+            box-shadow:
+                0 0 0 2px var(--color-bg-dark),
+                0 0 0 5px var(--color-focus-ring),
+                0 4px 16px var(--color-primary-glow);
         }
 
-        .footer {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--color-border);
-            font-size: 0.75rem;
-            color: var(--color-text-muted);
-            opacity: 0.7;
-            transition: opacity var(--transition-base);
-            letter-spacing: 0.03em;
-        }
-
-        .footer:hover {
-            opacity: 1;
-        }
-
+        /* ── Alert ── */
         .alert {
-            padding: 0.875rem 1rem;
+            padding: 0.9rem 1.1rem;
             border-radius: var(--input-radius);
-            font-size: 0.875rem;
+            font-size: var(--font-size-small);
             margin-bottom: 1.5rem;
             border: 1px solid;
             display: flex;
             align-items: flex-start;
             gap: 0.625rem;
+            line-height: 1.55;
         }
 
         .alert::before {
             content: "";
-            width: 18px;
-            height: 18px;
+            width: 16px; height: 16px;
             flex-shrink: 0;
-            margin-top: 2px;
+            margin-top: 1px;
         }
 
         .alert--error {
-            background: hsla(0, 72%, 60%, 0.08);
-            border-color: hsla(0, 72%, 60%, 0.2);
-            color: hsl(0, 72%, 70%);
+            background: hsla(0, 68%, 58%, 0.07);
+            border-color: hsla(0, 68%, 58%, 0.18);
+            color: hsl(0, 70%, 72%);
         }
 
         .alert--error::before {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23F87171'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'/%3E%3C/svg%3E");
+            background-size: contain;
         }
 
         .alert--success {
-            background: hsla(142, 69%, 58%, 0.08);
-            border-color: hsla(142, 69%, 58%, 0.2);
-            color: hsl(142, 69%, 68%);
+            background: hsla(152, 60%, 50%, 0.07);
+            border-color: hsla(152, 60%, 50%, 0.18);
+            color: hsl(152, 60%, 68%);
         }
 
+        /* ── MOTD ── */
         .motd {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: 1.5rem;
-            padding: 0.75rem 1rem;
-            background: hsla(var(--brand-hue), 50%, 50%, 0.06);
-            border: 1px solid hsla(var(--brand-hue), 50%, 50%, 0.1);
-            border-left: 3px solid var(--color-primary);
+            padding: 0.8rem 1.1rem;
+            background: var(--color-primary-subtle);
+            border: 1px solid hsla(var(--brand-hue), 55%, 55%, 0.12);
+            border-left: 2px solid hsla(var(--brand-hue), 70%, 60%, 0.5);
             border-radius: var(--input-radius);
-            font-size: 0.8125rem;
+            font-size: var(--font-size-small);
             color: var(--color-text-muted);
             min-height: 3rem;
             transition: opacity var(--transition-slow);
+            line-height: 1.55;
         }
 
         .motd span {
-            color: var(--color-primary);
+            color: hsl(var(--brand-hue), 75%, 72%);
             font-weight: 500;
         }
 
+        /* ── System Info ── */
         .sys-info {
-            margin-top: 1.75rem;
+            margin-top: 1.85rem;
             padding-top: 1.5rem;
-            border-top: 1px solid var(--color-border);
+            border-top: 1px solid;
+            border-image: linear-gradient(90deg, transparent, var(--color-border-mid), transparent) 1;
         }
 
         .sys-info-toggle {
@@ -396,13 +463,13 @@
             font-size: 0.6875rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--color-text-muted);
+            letter-spacing: 0.13em;
+            color: var(--color-text-faint);
             background: none;
             border: none;
             cursor: pointer;
-            padding: 0.5rem 0;
-            min-height: var(--min-touch-target);
+            padding: 0.375rem 0;
+            min-height: 40px;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -411,29 +478,26 @@
             text-align: left;
         }
 
-        .sys-info-toggle:hover {
-            color: var(--color-text);
-        }
+        .sys-info-toggle:hover { color: var(--color-text-muted); }
 
         .sys-info-arrow {
             display: inline-block;
-            font-size: 0.625rem;
+            font-size: 0.5625rem;
             transition: transform var(--transition-base);
+            opacity: 0.7;
         }
 
-        .sys-info.open .sys-info-arrow {
-            transform: rotate(90deg);
-        }
+        .sys-info.open .sys-info-arrow { transform: rotate(90deg); }
 
         .sys-info-grid {
             display: grid;
             grid-template-columns: auto 1fr;
-            gap: 0.375rem 1rem;
+            gap: 0.3rem 1rem;
             align-items: baseline;
             max-height: 0;
             overflow: hidden;
             opacity: 0;
-            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
         }
 
         .sys-info.open .sys-info-grid {
@@ -444,43 +508,137 @@
 
         .sys-info-label {
             font-family: "SF Mono", "Cascadia Code", "Fira Code", ui-monospace, monospace;
-            font-size: 0.6875rem;
-            color: var(--color-text-muted);
+            font-size: 0.6562rem;
+            color: var(--color-text-faint);
             white-space: nowrap;
+            letter-spacing: 0.02em;
         }
 
         .sys-info-value {
             font-family: "SF Mono", "Cascadia Code", "Fira Code", ui-monospace, monospace;
-            font-size: 0.6875rem;
-            color: var(--color-primary);
+            font-size: 0.6562rem;
+            color: hsl(var(--brand-hue), 65%, 68%);
             word-break: break-word;
         }
 
-        @media (max-width: 400px) {
-            :root {
-                --card-radius: 16px;
-                --input-radius: 10px;
-            }
-            .logo-wrap { width: 68px; height: 68px; }
-            .logo svg { width: 36px; height: 36px; }
-            .btn, .form-group input { min-height: 48px; }
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid;
+            border-image: linear-gradient(90deg, transparent, var(--color-border), transparent) 1;
+            font-size: var(--font-size-xs);
+            color: var(--color-text-faint);
+            letter-spacing: 0.04em;
+            opacity: 0.65;
+            transition: opacity var(--transition-base);
         }
 
-        @media (max-height: 580px) and (orientation: landscape) {
-            .card { padding: 1.25rem var(--card-padding-x); }
+        .footer:hover { opacity: 1; }
+
+        /* ── Responsive ── */
+        /* ── Mobile: alles in den Viewport zwingen ── */
+        @media (max-width: 600px) {
+            :root {
+                --card-radius: 0px;
+                --input-radius: 10px;
+                --card-padding-x: 1.375rem;
+                --card-padding-y: 1.25rem;
+                --min-touch-target: 46px;
+                --font-size-h1: 1.35rem;
+            }
+
+            html, body {
+                height: 100%;
+                height: 100dvh;
+                overflow: hidden;
+            }
+
+            body {
+                padding: 0;
+                align-items: stretch;
+            }
+
+            .card {
+                max-width: 100%;
+                width: 100%;
+                height: 100%;
+                height: 100dvh;
+                border-radius: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                overflow: hidden;
+                padding: max(1.25rem, env(safe-area-inset-top)) max(1.375rem, env(safe-area-inset-right)) max(1.25rem, env(safe-area-inset-bottom)) max(1.375rem, env(safe-area-inset-left));
+            }
+
             .logo { margin-bottom: 1rem; }
-            .logo-wrap { width: 48px; height: 48px; }
-            .logo svg { width: 28px; height: 28px; }
+            .logo-wrap { width: 56px; height: 56px; }
+            .logo svg  { width: 30px; height: 30px; }
+
             .header { margin-bottom: 1rem; }
+            .header h1 { margin-bottom: 0.25rem; }
+
+            .divider { margin-bottom: 1rem; }
+
             .form-group { margin-bottom: 0.75rem; }
-            .btn { margin-top: 1rem; }
-            .motd { margin-top: 0.75rem; }
-            .sys-info { margin-top: 1rem; padding-top: 1rem; }
+            .form-group label { margin-bottom: 0.35rem; font-size: 0.75rem; }
+            .form-group input { padding: 0.65rem 0.875rem; font-size: 0.9rem; }
+
+            .btn { margin-top: 1rem; padding: 0.65rem 1rem; font-size: 0.9rem; }
+
+            .motd {
+                margin-top: 0.875rem;
+                padding: 0.55rem 0.875rem;
+                min-height: 2.4rem;
+                font-size: 0.75rem;
+            }
+
+            .sys-info { margin-top: 1rem; padding-top: 0.875rem; }
+
+            .footer { margin-top: 1rem; padding-top: 0.875rem; }
+        }
+
+        /* ── Landscape Mobile ── */
+        @media (max-height: 500px) and (orientation: landscape) {
+            :root {
+                --card-padding-x: 1.5rem;
+                --card-padding-y: 0.875rem;
+                --min-touch-target: 40px;
+            }
+
+            html, body { height: 100%; height: 100dvh; overflow: hidden; }
+            body { padding: 0; align-items: stretch; }
+
+            .card {
+                max-width: 100%; width: 100%;
+                height: 100%; height: 100dvh;
+                border-radius: 0;
+                display: flex; flex-direction: column; justify-content: center;
+                overflow: hidden;
+                padding: 0.75rem 2rem;
+            }
+
+            .logo { margin-bottom: 0.5rem; }
+            .logo-wrap { width: 40px; height: 40px; }
+            .logo svg  { width: 22px; height: 22px; }
+            .header { margin-bottom: 0.5rem; }
+            .header h1 { font-size: 1.15rem; margin-bottom: 0.15rem; }
+            .header p  { font-size: 0.75rem; }
+            .divider { margin-bottom: 0.5rem; }
+            .form-group { margin-bottom: 0.4rem; }
+            .form-group label { margin-bottom: 0.2rem; font-size: 0.7rem; }
+            .form-group input { padding: 0.45rem 0.75rem; font-size: 0.85rem; min-height: 36px; }
+            .btn { margin-top: 0.5rem; padding: 0.45rem 1rem; font-size: 0.85rem; min-height: 36px; }
+            .motd { margin-top: 0.4rem; padding: 0.3rem 0.75rem; min-height: 0; font-size: 0.7rem; }
+            .sys-info { display: none; }
+            .footer { margin-top: 0.5rem; padding-top: 0.5rem; }
         }
 
         @media (min-width: 768px) {
             :root { --card-max-width: 480px; }
-            .header h1 { font-size: 2rem; }
+            .header h1 { font-size: 1.95rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -511,8 +669,10 @@
 
         <div class="header">
             <h1>KumarNet Gast</h1>
-            <p id="subtitle">Marcs Internet ist nicht umsonst... achso doch.</p>
+            <p id="subtitle">Marcs Internet ist nicht umsonst&hairsp;&mdash;&hairsp;achso doch.</p>
         </div>
+
+        <div class="divider"></div>
 
         <form method="POST" action="$PORTAL_ACTION$">
             <input type="hidden" name="redirurl" value="$PORTAL_REDIRURL$">
@@ -550,7 +710,7 @@
     <script>
     (function () {
         var subtitles = [
-            "Marcs Internet ist nicht umsonst... achso doch.",
+            "Marcs Internet ist nicht umsonst\u200A\u2014\u200Aachso doch.",
             "Bitte nicht das ganze Datenvolumen aufbrauchen.",
             "Schneller als dein mobiles Netz. Wahrscheinlich.",
             "Das WLAN-Passwort steht nicht auf dem Kuehlschrank.",
@@ -577,15 +737,15 @@
         ];
         var subEl = document.getElementById("subtitle");
         var subIdx = 0;
+        subEl.style.transition = "opacity 0.45s ease";
         setInterval(function () {
             subIdx = (subIdx + 1) % subtitles.length;
             subEl.style.opacity = "0";
             setTimeout(function () {
                 subEl.textContent = subtitles[subIdx];
                 subEl.style.opacity = "1";
-            }, 400);
+            }, 450);
         }, 6000);
-        subEl.style.transition = "opacity 0.4s ease";
 
         var tips = [
             "Tipp: <span>Das Passwort ist wirklich nicht 'Passwort'.</span>",
@@ -624,7 +784,7 @@
             setTimeout(function () {
                 motdEl.innerHTML = tips[tipIdx];
                 motdEl.style.opacity = "1";
-            }, 400);
+            }, 450);
         }, 8000);
     })();
     </script>
@@ -706,7 +866,6 @@
         } catch (e) {}
 
         if (navigator.language) addRow("Sprache", navigator.language);
-
         addRow("Status", navigator.onLine ? "Online" : "Offline");
 
         document.getElementById("sys-info-toggle").addEventListener("click", function () {
@@ -731,11 +890,11 @@
         function calcParams() {
             var area = W * H;
             if (isMobile) {
-                N = Math.max(25, Math.min(50, Math.round(area / 18000)));
-                maxD = Math.max(100, Math.min(160, Math.round(Math.min(W, H) * 0.22)));
+                N = Math.max(40, Math.min(70, Math.round(area / 10000)));
+                maxD = Math.max(120, Math.min(200, Math.round(Math.min(W, H) * 0.30)));
             } else {
-                N = Math.max(40, Math.min(100, Math.round(area / 12000)));
-                maxD = Math.max(120, Math.min(200, Math.round(Math.min(W, H) * 0.28)));
+                N = Math.max(70, Math.min(140, Math.round(area / 7000)));
+                maxD = Math.max(160, Math.min(260, Math.round(Math.min(W, H) * 0.38)));
             }
         }
 
@@ -750,7 +909,7 @@
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             calcParams();
             while (pts.length < N) {
-                pts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5, r: Math.random() * 2 + 1.5 });
+                pts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.7, vy: (Math.random() - 0.5) * 0.7, r: Math.random() * 2 + 1.2 });
             }
             if (pts.length > N) pts.length = N;
         }
@@ -765,10 +924,10 @@
                     dy = pts[i].y - pts[j].y;
                     d = Math.sqrt(dx * dx + dy * dy);
                     if (d < maxD) {
-                        a = 0.25 * (1 - d / maxD);
+                        a = 0.5 * (1 - d / maxD);
                         ctx.beginPath();
-                        ctx.strokeStyle = "rgba(59,130,246," + a + ")";
-                        ctx.lineWidth = 1;
+                        ctx.strokeStyle = "rgba(96,165,250," + a + ")";
+                        ctx.lineWidth = 1.2;
                         ctx.moveTo(pts[i].x, pts[i].y);
                         ctx.lineTo(pts[j].x, pts[j].y);
                         ctx.stroke();
@@ -782,10 +941,10 @@
                     dy = pts[i].y - pointer.y;
                     d = Math.sqrt(dx * dx + dy * dy);
                     if (d < pointerRadius) {
-                        a = 0.3 * (1 - d / pointerRadius);
+                        a = 0.65 * (1 - d / pointerRadius);
                         ctx.beginPath();
-                        ctx.strokeStyle = "rgba(96,165,250," + a + ")";
-                        ctx.lineWidth = 1.2;
+                        ctx.strokeStyle = "rgba(147,197,253," + a + ")";
+                        ctx.lineWidth = 1.5;
                         ctx.moveTo(pts[i].x, pts[i].y);
                         ctx.lineTo(pointer.x, pointer.y);
                         ctx.stroke();
@@ -802,10 +961,10 @@
                     d = Math.sqrt(dx * dx + dy * dy);
                     if (d < pointerRadius) glow = 1 - d / pointerRadius;
                 }
-                var baseA = 0.5 + glow * 0.4;
-                var r = p.r + glow * 1.5;
+                var baseA = 0.75 + glow * 0.25;
+                var r = p.r + glow * 2.5;
                 ctx.beginPath();
-                ctx.fillStyle = "rgba(59,130,246," + baseA + ")";
+                ctx.fillStyle = "rgba(96,165,250," + baseA + ")";
                 ctx.arc(p.x, p.y, r, 0, 6.2832);
                 ctx.fill();
             }
@@ -817,13 +976,13 @@
                     dy = pointer.y - p.y;
                     d = Math.sqrt(dx * dx + dy * dy);
                     if (d < pointerRadius && d > 1) {
-                        var force = 0.02 * (1 - d / pointerRadius);
+                        var force = 0.018 * (1 - d / pointerRadius);
                         p.vx += (dx / d) * force;
                         p.vy += (dy / d) * force;
                     }
                 }
                 var speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-                if (speed > 1.2) { p.vx *= 0.98; p.vy *= 0.98; }
+                if (speed > 1.8) { p.vx *= 0.97; p.vy *= 0.97; }
                 p.x += p.vx;
                 p.y += p.vy;
                 if (p.x < 0 || p.x > W) p.vx *= -1;
@@ -839,16 +998,10 @@
             var x, y;
             if (e.touches && e.touches.length > 0) { x = e.touches[0].clientX; y = e.touches[0].clientY; }
             else { x = e.clientX; y = e.clientY; }
-            pointer.x = x;
-            pointer.y = y;
-            pointer.active = true;
+            pointer.x = x; pointer.y = y; pointer.active = true;
         }
 
-        function onPointerEnd() {
-            pointer.active = false;
-            pointer.x = -1000;
-            pointer.y = -1000;
-        }
+        function onPointerEnd() { pointer.active = false; pointer.x = -1000; pointer.y = -1000; }
 
         resize();
         nextFrame(frame);
