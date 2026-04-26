@@ -24,16 +24,16 @@
             --color-bg-mid:         hsl(220, 38%, 11%);
             --color-bg-light:       hsl(218, 32%, 14%);
 
-            --color-card:           hsla(222, 45%, 7%, 0.15);
-            --color-card-border:    hsla(210, 40%, 65%, 0.22);
-            --color-card-sheen:     hsla(210, 50%, 85%, 0.04);
+            --color-card:           hsla(222, 45%, 8%, 0.62);
+            --color-card-border:    hsla(210, 40%, 70%, 0.26);
+            --color-card-sheen:     hsla(210, 50%, 85%, 0.08);
 
             --color-text:           hsl(210, 18%, 96%);
             --color-text-muted:     hsl(215, 14%, 58%);
             --color-text-faint:     hsl(215, 12%, 40%);
 
-            --color-border:         hsla(215, 20%, 70%, 0.09);
-            --color-border-mid:     hsla(215, 20%, 70%, 0.14);
+            --color-border:         hsla(215, 20%, 70%, 0.14);
+            --color-border-mid:     hsla(215, 20%, 70%, 0.24);
             --color-input-bg:       hsla(224, 50%, 5%, 0.65);
             --color-focus-ring:     hsla(var(--brand-hue), 80%, 60%, 0.20);
 
@@ -41,9 +41,9 @@
             --color-success:        hsl(152, 60%, 52%);
 
             --card-max-width:       440px;
-            --card-radius:          22px;
+            --card-radius:          24px;
             --input-radius:         13px;
-            --btn-radius:           13px;
+            --btn-radius:           14px;
 
             --font-size-h1:         clamp(1.45rem, 5vw, 1.825rem);
             --font-size-body:       clamp(0.875rem, 2vw, 0.9375rem);
@@ -54,7 +54,7 @@
             --card-padding-y:       clamp(2.25rem, 6vw, 3.25rem);
 
             --min-touch-target:     52px;
-            --card-blur:            6px;
+            --card-blur:            16px;
 
             --transition-fast:      0.14s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-base:      0.28s cubic-bezier(0.4, 0, 0.2, 1);
@@ -97,10 +97,10 @@
             width: 100%; height: 100%;
             z-index: 0;
             background:
-                radial-gradient(ellipse 100% 55% at 50% -10%, hsla(var(--brand-hue), 70%, 20%, 0.22) 0%, transparent 65%),
-                radial-gradient(ellipse 70% 50% at 15% 110%, hsla(250, 60%, 22%, 0.16) 0%, transparent 55%),
-                radial-gradient(ellipse 55% 45% at 90% 90%, hsla(200, 50%, 18%, 0.12) 0%, transparent 50%),
-                linear-gradient(168deg, var(--color-bg-darkest) 0%, var(--color-bg-dark) 30%, var(--color-bg-mid) 65%, var(--color-bg-light) 100%);
+                radial-gradient(ellipse 100% 60% at 50% -12%, hsla(var(--brand-hue), 74%, 24%, 0.30) 0%, transparent 68%),
+                radial-gradient(ellipse 70% 52% at 12% 112%, hsla(248, 58%, 24%, 0.19) 0%, transparent 58%),
+                radial-gradient(ellipse 55% 45% at 92% 92%, hsla(190, 58%, 19%, 0.14) 0%, transparent 52%),
+                linear-gradient(168deg, var(--color-bg-darkest) 0%, var(--color-bg-dark) 28%, var(--color-bg-mid) 62%, var(--color-bg-light) 100%);
             pointer-events: none;
         }
 
@@ -112,6 +112,8 @@
             z-index: 1;
             pointer-events: none;
             display: block;
+            opacity: 0.9;
+            filter: saturate(1.15);
         }
 
         /* Canvas-Partikel */
@@ -124,11 +126,11 @@
             border: 1px solid var(--color-card-border);
             border-radius: var(--card-radius);
             box-shadow:
-                0 0 0 1px rgba(255, 255, 255, 0.04),
-                0 2px 4px rgba(0, 0, 0, 0.35),
-                0 8px 32px rgba(0, 0, 0, 0.45),
-                0 24px 64px rgba(0, 0, 0, 0.38),
-                0 0 100px -24px var(--color-primary-glow);
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                0 0 0 1px rgba(255, 255, 255, 0.03),
+                0 10px 28px rgba(0, 0, 0, 0.38),
+                0 28px 72px rgba(0, 0, 0, 0.44),
+                0 0 130px -22px var(--color-primary-glow);
             width: 100%;
             max-width: var(--card-max-width);
             padding: var(--card-padding-y) var(--card-padding-x);
@@ -144,11 +146,12 @@
             inset: 0;
             border-radius: inherit;
             background:
-                linear-gradient(135deg,
-                    rgba(255,255,255,0.055) 0%,
-                    rgba(255,255,255,0.015) 30%,
-                    transparent 60%,
-                    rgba(255,255,255,0.02) 100%);
+                linear-gradient(145deg,
+                    rgba(255,255,255,0.09) 0%,
+                    rgba(255,255,255,0.03) 22%,
+                    rgba(255,255,255,0.01) 44%,
+                    transparent 68%,
+                    rgba(255,255,255,0.025) 100%);
             pointer-events: none;
         }
 
@@ -237,7 +240,7 @@
 
         .header h1 {
             font-size: var(--font-size-h1);
-            font-weight: 600;
+            font-weight: 650;
             letter-spacing: -0.03em;
             margin-bottom: 0.55rem;
             background: linear-gradient(140deg,
@@ -247,6 +250,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 0 24px hsla(var(--brand-hue), 65%, 66%, 0.12);
         }
 
         .header p {
@@ -299,6 +303,7 @@
                 border-color var(--transition-base),
                 box-shadow var(--transition-base),
                 background-color var(--transition-base);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
             -webkit-appearance: none;
             appearance: none;
         }
@@ -336,9 +341,10 @@
             letter-spacing: 0.015em;
             font-family: inherit;
             color: #fff;
-            background: linear-gradient(135deg,
-                var(--color-primary) 0%,
-                var(--color-primary-deep) 100%);
+            background: linear-gradient(140deg,
+                hsl(var(--brand-hue), 84%, 62%) 0%,
+                hsl(var(--brand-hue), 86%, 54%) 46%,
+                hsl(var(--brand-hue), 88%, 47%) 100%);
             border: none;
             border-radius: var(--btn-radius);
             cursor: pointer;
@@ -379,8 +385,8 @@
         .btn:hover {
             filter: brightness(1.1);
             box-shadow:
-                0 4px 16px var(--color-primary-glow),
-                0 10px 36px rgba(0, 0, 0, 0.3);
+                0 8px 24px hsla(var(--brand-hue), 85%, 56%, 0.28),
+                0 14px 36px rgba(0, 0, 0, 0.34);
             transform: translateY(-2px);
         }
 
@@ -446,9 +452,9 @@
             justify-content: center;
             margin-top: 1.5rem;
             padding: 0.8rem 1.1rem;
-            background: var(--color-primary-subtle);
-            border: 1px solid hsla(var(--brand-hue), 55%, 55%, 0.12);
-            border-left: 2px solid hsla(var(--brand-hue), 70%, 60%, 0.5);
+            background: linear-gradient(145deg, hsla(var(--brand-hue), 70%, 54%, 0.12), hsla(var(--brand-hue), 72%, 42%, 0.05));
+            border: 1px solid hsla(var(--brand-hue), 55%, 55%, 0.18);
+            border-left: 2px solid hsla(var(--brand-hue), 72%, 62%, 0.7);
             border-radius: var(--input-radius);
             font-size: var(--font-size-small);
             color: var(--color-text-muted);
@@ -465,7 +471,10 @@
         /* ── System Info ── */
         .sys-info {
             margin-top: 1.85rem;
-            padding-top: 1.5rem;
+            padding: 1rem 1rem 0.25rem;
+            border: 1px solid hsla(var(--brand-hue), 50%, 58%, 0.16);
+            border-radius: var(--input-radius);
+            background: linear-gradient(150deg, hsla(var(--brand-hue), 70%, 52%, 0.08), hsla(var(--brand-hue), 76%, 46%, 0.03));
             border-top: 1px solid;
             border-image: linear-gradient(90deg, transparent, var(--color-border-mid), transparent) 1;
         }
@@ -543,7 +552,7 @@
             font-size: var(--font-size-xs);
             color: var(--color-text-faint);
             letter-spacing: 0.04em;
-            opacity: 0.65;
+            opacity: 0.76;
             transition: opacity var(--transition-base);
         }
 
