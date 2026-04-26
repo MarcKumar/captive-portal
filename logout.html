@@ -73,12 +73,13 @@
 
         #network-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
+            width: 100vw;
+            height: 100dvh;
+            display: block;
             z-index: 0;
             pointer-events: none;
+            transform: translateZ(0);
         }
 
         .card {
@@ -508,7 +509,7 @@
                 transform: none;
             }
             #network-bg {
-                display: none;
+                opacity: 0.45;
             }
         }
     </style>
@@ -683,12 +684,15 @@
     <script>
     (function () {
         var c = document.getElementById("network-bg");
+        if (!c) return;
         var ctx = c.getContext("2d");
+        if (!ctx) return;
         var pts = [];
         var N, maxD;
         var W = 0, H = 0;
         var dpr = window.devicePixelRatio || 1;
         var isMobile = window.innerWidth < 768;
+        var reducedMotion = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
         var pointer = { x: -1000, y: -1000, active: false };
         var pointerRadius = 200;
         var time = 0;
@@ -709,13 +713,30 @@
 
         function calcParams() {
             var area = W * H;
-            if (isMobile) {
+            if (reducedMotion) {
+                N = Math.max(18, Math.min(38, Math.round(area / 22000)));
+                maxD = Math.max(90, Math.min(130, Math.round(Math.min(W, H) * 0.2)));
+            } else if (isMobile) {
                 N = Math.max(30, Math.min(60, Math.round(area / 15000)));
                 maxD = Math.max(110, Math.min(170, Math.round(Math.min(W, H) * 0.24)));
             } else {
                 N = Math.max(50, Math.min(120, Math.round(area / 10000)));
                 maxD = Math.max(130, Math.min(220, Math.round(Math.min(W, H) * 0.3)));
             }
+        }
+
+        function getViewportWidth() {
+            if (window.visualViewport && window.visualViewport.width) {
+                return Math.round(window.visualViewport.width);
+            }
+            return window.innerWidth || document.documentElement.clientWidth || 0;
+        }
+
+        function getViewportHeight() {
+            if (window.visualViewport && window.visualViewport.height) {
+                return Math.round(window.visualViewport.height);
+            }
+            return window.innerHeight || document.documentElement.clientHeight || 0;
         }
 
         function makeParticle() {
@@ -734,9 +755,10 @@
         }
 
         function resize() {
-            W = window.innerWidth || document.documentElement.clientWidth;
-            H = window.innerHeight || document.documentElement.clientHeight;
+            W = getViewportWidth();
+            H = getViewportHeight();
             isMobile = W < 768;
+            dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 2 : 2.5);
             c.width = W * dpr;
             c.height = H * dpr;
             c.style.width = W + "px";
@@ -749,7 +771,7 @@
 
         function frame() {
             ctx.clearRect(0, 0, W, H);
-            time += 0.006;
+            time += reducedMotion ? 0.0025 : 0.006;
             var i, j, dx, dy, d, a, p;
 
             for (i = 0; i < pts.length; i++) {
@@ -843,7 +865,11 @@
                 p.y = Math.max(0, Math.min(H, p.y));
             }
 
-            nextFrame(frame);
+            if (reducedMotion) {
+                setTimeout(function () { nextFrame(frame); }, 80);
+            } else {
+                nextFrame(frame);
+            }
         }
 
         function onPointer(e) {
@@ -868,7 +894,11 @@
 
         resize();
         nextFrame(frame);
-        window.addEventListener("resize", function () { dpr = window.devicePixelRatio || 1; resize(); });
+        window.addEventListener("resize", resize);
+        window.addEventListener("orientationchange", resize);
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener("resize", resize);
+        }
         window.addEventListener("mousemove", onPointer);
         window.addEventListener("touchstart", onPointer, { passive: true });
         window.addEventListener("touchmove", onPointer, { passive: true });
