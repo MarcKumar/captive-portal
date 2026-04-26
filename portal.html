@@ -114,7 +114,7 @@
             display: block;
         }
 
-        /* DOM-Partikel via rAF – direkte Body-Kinder, styles werden inline gesetzt */
+        /* Canvas-Partikel */
 
         /* ── Card ── */
         .card {
@@ -560,9 +560,6 @@
                 --font-size-h1: 1.35rem;
             }
 
-            /* Canvas deaktivieren auf Mobile – DOM-Partikel via JS */
-            #network-bg { display: none; }
-
             .card {
                 position: fixed;
                 top: 0; left: 0; right: 0; bottom: 0;
@@ -617,8 +614,6 @@
                 --min-touch-target: 40px;
             }
 
-            #network-bg { display: none; }
-
             .card {
                 position: fixed;
                 top: 0; left: 0; right: 0; bottom: 0;
@@ -662,7 +657,7 @@
                 transition-duration: 0.01ms !important;
             }
             .card { opacity: 1; transform: none; }
-            #network-bg { display: none; }
+            #network-bg { opacity: 0.4; }
             #bg { background:
                 linear-gradient(168deg, var(--color-bg-darkest) 0%, var(--color-bg-dark) 30%, var(--color-bg-mid) 65%, var(--color-bg-light) 100%); }
         }
@@ -890,50 +885,7 @@
     </script>
 
     <script>
-    /* ── DOM-Partikel für Mobile (Canvas-Fallback, rAF-animiert) ── */
-    (function () {
-        if (window.innerWidth > 600) return;
-        var W = window.innerWidth || 390;
-        var H = window.innerHeight || 844;
-        var N = 45, range = 120;
-        var pts = [];
-        var raf = window.requestAnimationFrame || window.webkitRequestAnimationFrame || function(f){setTimeout(f,16);};
-
-        for (var i = 0; i < N; i++) {
-            var el = document.createElement("div");
-            var size = Math.random() * 3 + 2;
-            el.style.cssText = "position:fixed;border-radius:50%;pointer-events:none;z-index:999;" +
-                "width:" + size + "px;height:" + size + "px;" +
-                "background:rgba(96,165,250,0.85);";
-            document.body.appendChild(el);
-            pts.push({
-                el: el,
-                x: Math.random() * W,
-                y: Math.random() * H,
-                vx: (Math.random() - 0.5) * 0.6,
-                vy: (Math.random() - 0.5) * 0.6
-            });
-        }
-
-        function animatePts() {
-            for (var i = 0; i < pts.length; i++) {
-                var p = pts[i];
-                p.x += p.vx; p.y += p.vy;
-                if (p.x < 0 || p.x > W) p.vx *= -1;
-                if (p.y < 0 || p.y > H) p.vy *= -1;
-                p.x = Math.max(0, Math.min(W, p.x));
-                p.y = Math.max(0, Math.min(H, p.y));
-                p.el.style.left = p.x + "px";
-                p.el.style.top = p.y + "px";
-            }
-            raf(animatePts);
-        }
-        raf(animatePts);
-    })();
-    </script>
-
-    <script>
-    /* ── Canvas-Animation (Desktop) ── */
+    /* ── Canvas-Animation ── */
     (function () {
         var c = document.getElementById("network-bg");
         if (!c || getComputedStyle(c).display === "none") return;
