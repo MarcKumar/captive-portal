@@ -6,7 +6,7 @@ Marc wollte eigentlich nur, dass sich Gaeste im WLAN anmelden. Herausgekommen is
 
 ## Was ist das hier?
 
-Ein Captive Portal fuer OPNsense, das angezeigt wird wenn sich jemand ins Gaeste-WLAN einloggen will. Gebaut fuer den privaten Gebrauch unter Freunden - also weniger "Enterprise Security" und mehr "Marc hat zu viel Freizeit".
+Ein Captive Portal fuer pfSense & OPNsense, das angezeigt wird wenn sich jemand ins Gaeste-WLAN einloggen will. Gebaut fuer den privaten Gebrauch unter Freunden - also weniger "Enterprise Security" und mehr "Marc hat zu viel Freizeit".
 
 ## Dateien
 
@@ -22,6 +22,7 @@ Das war's. Drei HTML-Dateien. Kein Framework. Kein Build-Step. Kein `node_module
 ## Features
 
 ### portal.html - "Reinlassen bitte"
+
 - Animierter Netzwerk-Partikel-Hintergrund (ja, wirklich noetig)
 - Glasmorphism-Card weil wir in 2026 leben
 - Rotierende witzige Untertitel und Tipps des Tages
@@ -30,6 +31,7 @@ Das war's. Drei HTML-Dateien. Kein Framework. Kein Build-Step. Kein `node_module
 - Der Username ist vorausgefuellt mit "guest" weil Marc nett ist
 
 ### error.html - "SICHERHEITSVERSTOSS ERKANNT"
+
 - Rote Alarm-Aesthetik mit zitternder Card
 - Blinkendes "SICHERHEITSVERSTOSS ERKANNT" Banner
 - Fake Vorfall-ID, fake IP-Ermittlung, fake Standort-Triangulation
@@ -41,6 +43,7 @@ Das war's. Drei HTML-Dateien. Kein Framework. Kein Build-Step. Kein `node_module
 - Powered by der "KumarNet Cyber Defense Unit"
 
 ### logout.html - "Tschuess!"
+
 - Dramatischer Abschied mit Logout-Tuer-Icon
 - Rotierende traurige Untertitel: "Das WLAN weint leise." / "Die Partikel sind jetzt traurig."
 - Fake Session-Statistiken die nacheinander eingeblendet werden
@@ -59,12 +62,14 @@ Das war's. Drei HTML-Dateien. Kein Framework. Kein Build-Step. Kein `node_module
 **Build-Tools:** LOL.
 
 **Browser-Support:**
+
 - Chrome/Edge: Alles funktioniert inkl. Battery API, Network Info, Device Memory
 - Firefox: Fast alles, minus ein paar Chromium-exklusive APIs
 - Safari: Das Noetigste. Apple halt.
 - Internet Explorer: Nein.
 
 **APIs die benutzt werden (wenn verfuegbar):**
+
 - `navigator.connection` - Netzwerk-Typ & Speed
 - `navigator.getBattery()` - Akku-Level
 - `navigator.hardwareConcurrency` - CPU-Kerne
@@ -75,7 +80,7 @@ Das war's. Drei HTML-Dateien. Kein Framework. Kein Build-Step. Kein `node_module
 
 Nicht verfuegbare APIs werden einfach nicht angezeigt. Keine Fehler, kein Drama (ausser auf der Error-Seite, da ist alles Drama).
 
-## Installation auf OPNsense
+## Installation auf pfSense & OPNsense
 
 1. Gehe zu **Services > Captive Portal > Zones**
 2. Erstelle oder bearbeite eine Zone
@@ -118,4 +123,4 @@ Mach damit was du willst. Aber wenn du es benutzt, sag Marc Bescheid - er will a
 
 ---
 
-*Powered by Marcs Keller-Rack. Uptime seit dem letzten Stromausfall: wahrscheinlich lang.*
+_Powered by Marcs Keller-Rack. Uptime seit dem letzten Stromausfall: wahrscheinlich lang._

@@ -9,7 +9,16 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(find:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(gunzip -c \"webfetch-1777219899118-o1ov8a.bin\")",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 *)",
+      "mcp__plugin_context-mode_context-mode__ctx_execute"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "obsidian"
+  ]
 }
